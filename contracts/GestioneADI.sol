@@ -40,34 +40,49 @@ contract GestioneADI {
     // Informazioni su chi può inserire prestazioni per un determinato paziente
     mapping(address => address) private medicoBase; // Associazione paziente-medico (chiave-valore)
 
-    // Inserire tutti i require necessari
+    // dalla versione 0.7.0 non è necessaria la specifica della visibilità nel costruttore
+    constructor(address _asur) { 
+        asur = _asur;
+    }
 
     // Setter di tutte le strutture
     function setPaziente(address _pz, uint8 _lat, uint8 _lon) public {
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+
         pazienti.push(paziente(_pz, _lat, _lon));
     }
 
     function setMedico(address _medico) public{
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+
         medici.push(_medico);
     }
 
     function setOperatore(address _operatore) public {
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+
         operatori.push(_operatore);
     }
 
-    function setAsur(address _asur) public{
-        asur = _asur;
-    }
-
     function setAttrezzatura(address _pz, string memory _att) public{
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        require(ckpaziente(_pz), "Paziente inesistente");
+
         ckattrezzatura.push(attrezzature(_pz, _att));
     }
 
     function setTerapia(address _pz, string memory _ter) public{
+        require(ckmedico(msg.sender), "Medico inesistente");
+        require(ckpaziente(_pz), "Paziente inesistente");
+        require(medicoBase[_pz]==msg.sender, "Medico non associato al paziente");
+
         ckterapie.push(terapie(_pz, _ter));
     }
 
-    function SetConferma(address _pz, address _op, string memory _prest) public{
+    function SetConferma(address _pz, address _op, string memory _prest) public{ // Da completare
+        require(ckpaziente(_pz), "Paziente inesistente");
+        require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
+
         conferma.push(conferme(_pz, _op, _prest));
     }
 
@@ -97,6 +112,13 @@ contract GestioneADI {
     function ckmedico(address _md) private view returns (bool){
         for (uint256 i=0; i < medici.length; i++){
             if (medici[i] == _md){return true;}
+        }
+        return false;
+    }
+
+    function ckoperatore(address _op) private view returns (bool){
+        for (uint256 i=0; i < operatori.length; i++){
+            if (operatori[i] == _op){return true;}
         }
         return false;
     }
