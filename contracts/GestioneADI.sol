@@ -13,13 +13,13 @@ contract GestioneADI {
     // Struttura informazioni attrezzature (hash)
     struct attrezzature {
         address paziente;
-        string attrezzatura; // Valutare se possibile bytes32
+        bytes32 attrezzatura;
     }
 
     // Struttura informazioni terapie (hash)
     struct terapie {
         address paziente;
-        string terapia; // Valutare se possibile bytes32
+        bytes32 terapia;
     }
 
     // Struttura gestione delle conferme
@@ -29,16 +29,18 @@ contract GestioneADI {
         string prestazione;
     }
 
+    paziente[] private richieste;           // Array delle richieste ADI
     paziente[] private pazienti;            // Array dei pazienti
     address[] private medici;               // Array dei medici
     address[] private operatori;            // Array degli operatori sanitari
     address private asur;                   // Account amministratore
-    attrezzature[] private ckattrezzatura;  // Array delle attrezzature (hash)
-    terapie[] private ckterapie;            // Array delle terapie (1 per paziente) (hash)
-    conferme[] private conferma;            // Array gestione delle conferme
+    attrezzature[] private listaattrezzatura;  // Array delle attrezzature (hash)
+    terapie[] private listaterapie;            // Array delle terapie (1 per paziente) (hash)
+    conferme[] private conferma;            // Array gestione delle conferme operatore
+    conferme[] private validazione;         // Array gestione delle conferme paziente
 
     // Informazioni su chi può inserire prestazioni per un determinato paziente
-    mapping(address => address) private medicoBase; // Associazione paziente-medico (chiave-valore)
+    mapping(address => address) private medicoCurante; // Associazione paziente-medico (chiave-valore)
 
     // dalla versione 0.7.0 non è necessaria la specifica della visibilità nel costruttore
     constructor(address _asur) { 
@@ -46,6 +48,10 @@ contract GestioneADI {
     }
 
     // Setter di tutte le strutture
+    function SetRichieste(address _pz, uint8 _lat, uint8 _lon) public {
+        richieste.push(paziente(_pz, _lat, _lon));
+    }
+    
     function setPaziente(address _pz, uint8 _lat, uint8 _lon) public {
         require(msg.sender == asur, "Utente senza privilegi necessari");
 
@@ -64,41 +70,46 @@ contract GestioneADI {
         operatori.push(_operatore);
     }
 
-    function setAttrezzatura(address _pz, string memory _att) public{
+    function setAttrezzatura(address _pz, bytes32 _att) public{
         require(msg.sender == asur, "Utente senza privilegi necessari");
         require(ckpaziente(_pz), "Paziente inesistente");
 
-        ckattrezzatura.push(attrezzature(_pz, _att));
+        listaattrezzatura.push(attrezzature(_pz, _att));
     }
 
-    function setTerapia(address _pz, string memory _ter) public{
+    function setTerapia(address _pz, bytes32 _ter) public{
         require(ckmedico(msg.sender), "Medico inesistente");
         require(ckpaziente(_pz), "Paziente inesistente");
-        require(medicoBase[_pz]==msg.sender, "Medico non associato al paziente");
+        require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
 
-        ckterapie.push(terapie(_pz, _ter));
+        listaterapie.push(terapie(_pz, _ter));
     }
 
-    function SetConferma(address _pz, address _op, string memory _prest) public{ // Da completare
+    function setConferma(address _pz, address _op, string memory _prest) public{
         require(ckpaziente(_pz), "Paziente inesistente");
         require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
 
         conferma.push(conferme(_pz, _op, _prest));
     }
 
-    // Remove della conferma (prestazione validata dal paziente)
-    function removeConferma(uint256 _i) public{
-        require(_i < conferma.length, "indice inesistente!!");
-
+    function confermaOperatore(address _pz, address _op, string memory _prest, uint256 _i) public{
+        validazione.push(conferme(_pz, _op, _prest));
         delete conferma[_i];
     }
 
+    // Remove della conferma (prestazione validata dal paziente)
+    function confermaPaziente(uint256 _i) public{
+        require(_i < conferma.length, "indice inesistente!!");
+
+        delete validazione[_i];
+    }
+
     // Setter del mapping paziente-medico
-    function setMedicobase(address _pz, address _md) public{
+    function setmedicoCurante(address _pz, address _md) public{
         require(ckpaziente(_pz), "Paziente inesistente");
         require(ckmedico(_md), "Medico inesistente");
 
-        medicoBase[_pz] = _md;
+        medicoCurante[_pz] = _md;
     }
 
     // Controlli sulla presenza di un valore negli array
@@ -121,5 +132,41 @@ contract GestioneADI {
             if (operatori[i] == _op){return true;}
         }
         return false;
+    }
+
+    function ckattrezzature(bytes32 hashcode, address _pz) public view returns (bool){
+        require(ckpaziente(_pz), "Paziente inesistente");
+        for (uint256 i=0; i < listaattrezzatura.length; i++){
+            if(listaattrezzatura[i].paziente == _pz){
+                if(listaattrezzatura[i].attrezzatura == hashcode){
+                    return true;
+                }
+            }
+
+        } 
+        return false;
+    }
+
+    function ckterapie(bytes32 hashcode, address _pz) public view returns (bool){
+        require(ckpaziente(_pz), "Paziente inesistente");
+        for (uint256 i=0; i < listaterapie.length; i++){
+            if(listaterapie[i].paziente == _pz){
+                if(listaterapie[i].terapia == hashcode){
+                    return true;
+                }
+            }
+
+        } 
+        return false;
+    }
+
+    function getConferme() public view returns (conferme[] memory){
+        return conferma;
+
+    }
+
+    function getValidazione() public view returns (conferme[] memory){
+        return validazione;
+
     }
 }
