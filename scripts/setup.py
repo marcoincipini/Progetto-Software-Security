@@ -26,12 +26,9 @@ def main():
         dati= list(filter(lambda x:x["IDPaziente"]==i,terapie))
         with open('temp.json','w') as file:
             json.dump(dati,file)
-        try:
-            hash = pinata.upload_to_pinata('temp.json')
-        except:
-            print('errore')
+        hash=print(pinata.upload_to_pinata('temp.json'))
         print(hash)
-        contratto.setTerapia(accounts[i],hash,{'from':accounts[0]})
+        #contratto.setTerapia(accounts[i],hash,{'from':accounts[0]})
 
 
     return contratto

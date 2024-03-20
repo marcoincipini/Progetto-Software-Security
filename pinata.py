@@ -1,9 +1,10 @@
-from brownie import GestioneADI, accounts, Contract
+#from brownie import GestioneADI, accounts, Contract
 import sys
 import requests
 import os
 from dotenv import load_dotenv
-import pprint
+#import pprint
+load_dotenv()
 
 def get_file_from_pinata(ipfs_hash):
     url = f"https://gateway.pinata.cloud/ipfs/{ipfs_hash}"
