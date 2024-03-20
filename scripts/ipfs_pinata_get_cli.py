@@ -38,6 +38,5 @@ def main():
     with open(os.path.join(save_directory, "retrieved_file.txt"), "wb") as file:
         file.write(file_content)
 
-
 if __name__ == "__main__":
     main()
