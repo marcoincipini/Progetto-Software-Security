@@ -2,7 +2,6 @@
 import requests
 import os
 from dotenv import load_dotenv
-import json
 
 # Load environment variables
 load_dotenv()
@@ -24,13 +23,7 @@ def get_file_from_pinata(ipfs_hash):
         
         # Parse della risposta json
         file_data = response.json()
-        # contenuto del file originale estratto dal file di risposta di pinata
-        original_file_content = file_data["payload"]["blob"]["rawLines"] 
-        # conversione della lista di caratteri ottenuta alla riga precedente in una stringa
-        stringa = ''.join(original_file_content) 
-        # conversione della stringa ottenuta sopra in una lista di oggetti json
-        json_data = json.loads(stringa)
-        return json_data
+        return file_data
     except requests.exceptions.RequestException as e:
         print("Errore durante la richiesta HTTP:", e) # controllo su eventuali errori della richiesta http
         return None
@@ -69,5 +62,3 @@ def upload_files_in_folder(folder_path):
             print(f"IPFS Hash: {response['IpfsHash']}")
             print()
 
-a='QmasEczq43jE8QWCcv3dzqMjutvVm8cKVVbZwweQAHAa4p'
-get_file_from_pinata(a)
