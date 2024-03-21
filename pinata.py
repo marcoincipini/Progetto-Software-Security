@@ -1,17 +1,19 @@
 #from brownie import GestioneADI, accounts, Contract
-import sys
 import requests
 import os
 from dotenv import load_dotenv
-#import pprint
+import json
+
+# Load environment variables
 load_dotenv()
 
 def get_file_from_pinata(ipfs_hash):
     url = f"https://gateway.pinata.cloud/ipfs/{ipfs_hash}"
-    headers = {'Authorization': f'Bearer {jwt_token}'}
     
     jwt_token = os.getenv('PINATA_JWT_TOKEN') # salvo in una variabile la chiave API necessaria per la richiesta a Pinata
 
+    headers = {'Authorization': f'Bearer {jwt_token}'}
+    
     try:
         """
         invia una richiesta GET all'URL specificato, inclusi gli header forniti, e memorizza la risposta nella variabile response. 
@@ -20,21 +22,24 @@ def get_file_from_pinata(ipfs_hash):
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Solleva un'eccezione se la richiesta HTTP non ha successo
         
-        # Parse the JSON response
+        # Parse della risposta json
         file_data = response.json()
-        
-        # estrazione del file originale dal json ottenuto, si può mettere qualsiasi cosa
-        original_file_content = file_data['content']
-        
-        return original_file_content  # restituisce il contenuto originale del file
+        # contenuto del file originale estratto dal file di risposta di pinata
+        original_file_content = file_data["payload"]["blob"]["rawLines"] 
+        # conversione della lista di caratteri ottenuta alla riga precedente in una stringa
+        stringa = ''.join(original_file_content) 
+        # conversione della stringa ottenuta sopra in una lista di oggetti json
+        json_data = json.loads(stringa)
+        return json_data
     except requests.exceptions.RequestException as e:
         print("Errore durante la richiesta HTTP:", e) # controllo su eventuali errori della richiesta http
         return None
 
 def upload_to_pinata(filepath):
+    url = "https://api.pinata.cloud/pinning/pinFileToIPFS"
+    
     jwt_token = os.getenv('PINATA_JWT_TOKEN') # salvo in una variabile la chiave API necessaria per la richiesta a Pinata
 
-    url = "https://api.pinata.cloud/pinning/pinFileToIPFS"
     headers = {'Authorization': f'Bearer {jwt_token}'}
 
     with open(filepath, 'rb') as file:
@@ -45,10 +50,10 @@ def upload_to_pinata(filepath):
         """
         response = requests.post(url, files={'file': file}, headers=headers)
         response_json = response.json() # restituisce il json associato al file caricato su Pinata
-
+        print(response_json)
         # Estrai l'hash del file caricato dal JSON di risposta
         ipfs_hash = response_json.get('IpfsHash', None)
-
+        print(ipfs_hash)
         return ipfs_hash  # Restituisci l'hash del file caricato
 
 """
@@ -63,3 +68,6 @@ def upload_files_in_folder(folder_path):
             response = upload_to_pinata(file_path)
             print(f"IPFS Hash: {response['IpfsHash']}")
             print()
+
+a='QmasEczq43jE8QWCcv3dzqMjutvVm8cKVVbZwweQAHAa4p'
+get_file_from_pinata(a)
