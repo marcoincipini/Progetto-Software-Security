@@ -24,13 +24,21 @@ def get_file_from_pinata(ipfs_hash):
         
         # Parse della risposta json
         file_data = response.json()
+        print(file_data[1])
+        temp_file_path = f"{'Paziente_Piano_terapeutico'}.json"
+
+        # Scrittura del dizionario nel file JSON temporaneo
+        with open(temp_file_path, 'w') as temp_file:
+            json.dump(file_data, temp_file, indent=4)
+        #print(file_data)
         # contenuto del file originale estratto dal file di risposta di pinata
-        original_file_content = file_data["payload"]["blob"]["rawLines"] 
+        #original_file_content = file_data["payload"]["blob"]["rawLines"] 
         # conversione della lista di caratteri ottenuta alla riga precedente in una stringa
-        stringa = ''.join(original_file_content) 
-        # conversione della stringa ottenuta sopra in una lista di oggetti json
-        json_data = json.loads(stringa)
-        return json_data
+        #stringa = ''.join(original_file_content) 
+        #conversione della stringa ottenuta sopra in una lista di oggetti json
+        #json_data = json.loads(file_data)
+        #print(json_data)
+        #return json_data
     except requests.exceptions.RequestException as e:
         print("Errore durante la richiesta HTTP:", e) # controllo su eventuali errori della richiesta http
         return None

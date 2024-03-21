@@ -1,1 +1,191 @@
-{"payload":{"allShortcutsEnabled":true,"fileTree":{"":{"items":[{"name":"contracts","path":"contracts","contentType":"directory"},{"name":"scripts","path":"scripts","contentType":"directory"},{"name":".gitattributes","path":".gitattributes","contentType":"file"},{"name":".gitignore","path":".gitignore","contentType":"file"},{"name":"brownie-config.yaml","path":"brownie-config.yaml","contentType":"file"},{"name":"pinata.py","path":"pinata.py","contentType":"file"},{"name":"temp.json","path":"temp.json","contentType":"file"}],"totalCount":7}},"fileTreeProcessingTime":1.98072,"foldersToFetch":[],"repo":{"id":769220191,"defaultBranch":"main","name":"Progetto-Software-Security","ownerLogin":"marcoincipini","currentUserCanPush":true,"isFork":false,"isEmpty":false,"createdAt":"2024-03-08T16:35:07.000+01:00","ownerAvatar":"https://avatars.githubusercontent.com/u/48022522?v=4","public":false,"private":true,"isOrgOwned":false},"codeLineWrapEnabled":false,"symbolsExpanded":false,"treeExpanded":true,"refInfo":{"name":"main","listCacheKey":"v0:1710336300.0","canEdit":true,"refType":"branch","currentOid":"fbbd54af880283111a933a320d91ff6f457732dd"},"path":"temp.json","currentUser":{"id":163012359,"login":"simgian0","userEmail":"simonegiano@hotmail.com"},"blob":{"rawLines":["[{\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Esposito\", \"Data inizio\": \"01/03/2024\", \"Data fine\": \"21/03/2024\", \"Medicina\": \"Paracetamolo\", \"Dosaggio\": \"500 mg\", \"Procedura\": \"Riposo\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. De Luca\", \"Data inizio\": \"12/03/2024\", \"Data fine\": \"01/04/2024\", \"Medicina\": \"Sertralina\", \"Dosaggio\": \"50 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Ferri\", \"Data inizio\": \"09/09/2023\", \"Data fine\": \"04/12/2023\", \"Medicina\": \"Ibuprofene\", \"Dosaggio\": \"400 mg\", \"Procedura\": \"Terapia fisica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Freddo\", \"Data inizio\": \"30/03/2023\", \"Data fine\": \"19/04/2023\", \"Medicina\": \"Escitalopram\", \"Dosaggio\": \"10 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Marino\", \"Data inizio\": \"09/05/2023\", \"Data fine\": \"29/05/2023\", \"Medicina\": \"Ibruprofene\", \"Dosaggio\": \"600 mg\", \"Procedura\": \"Riposo\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Moretti\", \"Data inizio\": \"27/12/2023\", \"Data fine\": \"11/01/2024\", \"Medicina\": \"Citalopram\", \"Dosaggio\": \"20 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Libanese\", \"Data inizio\": \"06/06/2023\", \"Data fine\": \"26/06/2023\", \"Medicina\": \"Prednisone\", \"Dosaggio\": \"30 mg\", \"Procedura\": \"Terapia immunosoppressiva\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Romano\", \"Data inizio\": \"02/05/2023\", \"Data fine\": \"22/05/2023\", \"Medicina\": \"Sertralina\", \"Dosaggio\": \"75 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. De Santis\", \"Data inizio\": \"06/01/2024\", \"Data fine\": \"26/01/2024\", \"Medicina\": \"Ibruprofene\", \"Dosaggio\": \"600 mg\", \"Procedura\": \"Terapia fisica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Secco\", \"Data inizio\": \"22/12/2023\", \"Data fine\": \"11/01/2024\", \"Medicina\": \"Omeprazolo\", \"Dosaggio\": \"20 mg\", \"Procedura\": \"Terapia gastrointestinale\"}]"],"stylingDirectives":[[]],"colorizedLines":null,"csv":null,"csvError":null,"dependabotInfo":{"showConfigurationBanner":null,"configFilePath":null,"networkDependabotPath":"/marcoincipini/Progetto-Software-Security/network/updates","dismissConfigurationNoticePath":"/settings/dismiss-notice/dependabot_configuration_notice","configurationNoticeDismissed":false},"displayName":"temp.json","displayUrl":"https://github.com/marcoincipini/Progetto-Software-Security/blob/main/temp.json?raw=true","headerInfo":{"blobSize":"2.15 KB","deleteTooltip":"Delete this file","editTooltip":"Edit this file","ghDesktopPath":"x-github-client://openRepo/https://github.com/marcoincipini/Progetto-Software-Security?branch=main&filepath=temp.json","isGitLfs":false,"onBranch":true,"shortPath":"cd25ffc","siteNavLoginPath":"/login?return_to=https%3A%2F%2Fgithub.com%2Fmarcoincipini%2FProgetto-Software-Security%2Fblob%2Fmain%2Ftemp.json","isCSV":false,"isRichtext":false,"toc":null,"lineInfo":{"truncatedLoc":"1","truncatedSloc":"1"},"mode":"file"},"image":false,"isCodeownersFile":null,"isPlain":false,"isValidLegacyIssueTemplate":false,"issueTemplate":null,"discussionTemplate":null,"language":"JSON","languageID":174,"large":false,"planSupportInfo":{"repoIsFork":null,"repoOwnedByCurrentUser":null,"requestFullPath":"/marcoincipini/Progetto-Software-Security/blob/main/temp.json","showFreeOrgGatedFeatureMessage":null,"showPlanSupportBanner":null,"upgradeDataAttributes":null,"upgradePath":null},"publishBannersInfo":{"dismissActionNoticePath":"/settings/dismiss-notice/publish_action_from_dockerfile","releasePath":"/marcoincipini/Progetto-Software-Security/releases/new?marketplace=true","showPublishActionBanner":false},"rawBlobUrl":"https://github.com/marcoincipini/Progetto-Software-Security/raw/main/temp.json","renderImageOrRaw":false,"richText":null,"renderedFileInfo":null,"shortPath":null,"symbolsEnabled":true,"tabSize":8,"topBannersInfo":{"overridingGlobalFundingFile":false,"globalPreferredFundingPath":null,"showInvalidCitationWarning":false,"citationHelpUrl":"https://docs.github.com/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-citation-files","actionsOnboardingTip":null},"truncated":false,"viewable":true,"workflowRedirectUrl":null,"symbols":{"timed_out":false,"not_analyzed":true,"symbols":[]}},"copilotInfo":{"documentationUrl":"https://docs.github.com/copilot/overview-of-github-copilot/about-github-copilot-for-individuals","notices":{"codeViewPopover":{"dismissed":false,"dismissPath":"/settings/dismiss-notice/code_view_copilot_popover"}},"userAccess":{"hasSubscriptionEnded":false,"orgHasCFBAccess":false,"userHasCFIAccess":false,"userHasOrgs":false,"userIsOrgAdmin":false,"userIsOrgMember":false,"business":null,"featureRequestInfo":null}},"copilotAccessAllowed":false,"csrf_tokens":{"/marcoincipini/Progetto-Software-Security/branches":{"post":"oMnlrLEPkmpDVsKSvCTemuzmagDCkbBUKZrQc9DuBUwavKTFgDqp5bXUSLgLlndAczE9ShCVpsHs5fggEkRA2w"},"/repos/preferences":{"post":"BTztGia6mDEonxTNkSEi-h5dNUCyCcc7Kz9eFJyXmGQC3xmsT98YXTvRw7GRi-g-upZGNeYefVFartY9tCSUkw"}}},"title":"Progetto-Software-Security/temp.json at main · marcoincipini/Progetto-Software-Security"}
+{
+    "payload": {
+        "allShortcutsEnabled": true,
+        "fileTree": {
+            "": {
+                "items": [
+                    {
+                        "name": "contracts",
+                        "path": "contracts",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": "scripts",
+                        "path": "scripts",
+                        "contentType": "directory"
+                    },
+                    {
+                        "name": ".gitattributes",
+                        "path": ".gitattributes",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": ".gitignore",
+                        "path": ".gitignore",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "brownie-config.yaml",
+                        "path": "brownie-config.yaml",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "pinata.py",
+                        "path": "pinata.py",
+                        "contentType": "file"
+                    },
+                    {
+                        "name": "temp.json",
+                        "path": "temp.json",
+                        "contentType": "file"
+                    }
+                ],
+                "totalCount": 7
+            }
+        },
+        "fileTreeProcessingTime": 1.98072,
+        "foldersToFetch": [],
+        "repo": {
+            "id": 769220191,
+            "defaultBranch": "main",
+            "name": "Progetto-Software-Security",
+            "ownerLogin": "marcoincipini",
+            "currentUserCanPush": true,
+            "isFork": false,
+            "isEmpty": false,
+            "createdAt": "2024-03-08T16:35:07.000+01:00",
+            "ownerAvatar": "https://avatars.githubusercontent.com/u/48022522?v=4",
+            "public": false,
+            "private": true,
+            "isOrgOwned": false
+        },
+        "codeLineWrapEnabled": false,
+        "symbolsExpanded": false,
+        "treeExpanded": true,
+        "refInfo": {
+            "name": "main",
+            "listCacheKey": "v0:1710336300.0",
+            "canEdit": true,
+            "refType": "branch",
+            "currentOid": "fbbd54af880283111a933a320d91ff6f457732dd"
+        },
+        "path": "temp.json",
+        "currentUser": {
+            "id": 163012359,
+            "login": "simgian0",
+            "userEmail": "simonegiano@hotmail.com"
+        },
+        "blob": {
+            "rawLines": [
+                "[{\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Esposito\", \"Data inizio\": \"01/03/2024\", \"Data fine\": \"21/03/2024\", \"Medicina\": \"Paracetamolo\", \"Dosaggio\": \"500 mg\", \"Procedura\": \"Riposo\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. De Luca\", \"Data inizio\": \"12/03/2024\", \"Data fine\": \"01/04/2024\", \"Medicina\": \"Sertralina\", \"Dosaggio\": \"50 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Ferri\", \"Data inizio\": \"09/09/2023\", \"Data fine\": \"04/12/2023\", \"Medicina\": \"Ibuprofene\", \"Dosaggio\": \"400 mg\", \"Procedura\": \"Terapia fisica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Freddo\", \"Data inizio\": \"30/03/2023\", \"Data fine\": \"19/04/2023\", \"Medicina\": \"Escitalopram\", \"Dosaggio\": \"10 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Marino\", \"Data inizio\": \"09/05/2023\", \"Data fine\": \"29/05/2023\", \"Medicina\": \"Ibruprofene\", \"Dosaggio\": \"600 mg\", \"Procedura\": \"Riposo\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Moretti\", \"Data inizio\": \"27/12/2023\", \"Data fine\": \"11/01/2024\", \"Medicina\": \"Citalopram\", \"Dosaggio\": \"20 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Libanese\", \"Data inizio\": \"06/06/2023\", \"Data fine\": \"26/06/2023\", \"Medicina\": \"Prednisone\", \"Dosaggio\": \"30 mg\", \"Procedura\": \"Terapia immunosoppressiva\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Romano\", \"Data inizio\": \"02/05/2023\", \"Data fine\": \"22/05/2023\", \"Medicina\": \"Sertralina\", \"Dosaggio\": \"75 mg\", \"Procedura\": \"Terapia psicologica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. De Santis\", \"Data inizio\": \"06/01/2024\", \"Data fine\": \"26/01/2024\", \"Medicina\": \"Ibruprofene\", \"Dosaggio\": \"600 mg\", \"Procedura\": \"Terapia fisica\"}, {\"IDPaziente\": 1, \"Nome\": \"Marco\", \"Cognome\": \"Neri\", \"Operatore\": \"Dr. Secco\", \"Data inizio\": \"22/12/2023\", \"Data fine\": \"11/01/2024\", \"Medicina\": \"Omeprazolo\", \"Dosaggio\": \"20 mg\", \"Procedura\": \"Terapia gastrointestinale\"}]"
+            ],
+            "stylingDirectives": [
+                []
+            ],
+            "colorizedLines": null,
+            "csv": null,
+            "csvError": null,
+            "dependabotInfo": {
+                "showConfigurationBanner": null,
+                "configFilePath": null,
+                "networkDependabotPath": "/marcoincipini/Progetto-Software-Security/network/updates",
+                "dismissConfigurationNoticePath": "/settings/dismiss-notice/dependabot_configuration_notice",
+                "configurationNoticeDismissed": false
+            },
+            "displayName": "temp.json",
+            "displayUrl": "https://github.com/marcoincipini/Progetto-Software-Security/blob/main/temp.json?raw=true",
+            "headerInfo": {
+                "blobSize": "2.15 KB",
+                "deleteTooltip": "Delete this file",
+                "editTooltip": "Edit this file",
+                "ghDesktopPath": "x-github-client://openRepo/https://github.com/marcoincipini/Progetto-Software-Security?branch=main&filepath=temp.json",
+                "isGitLfs": false,
+                "onBranch": true,
+                "shortPath": "cd25ffc",
+                "siteNavLoginPath": "/login?return_to=https%3A%2F%2Fgithub.com%2Fmarcoincipini%2FProgetto-Software-Security%2Fblob%2Fmain%2Ftemp.json",
+                "isCSV": false,
+                "isRichtext": false,
+                "toc": null,
+                "lineInfo": {
+                    "truncatedLoc": "1",
+                    "truncatedSloc": "1"
+                },
+                "mode": "file"
+            },
+            "image": false,
+            "isCodeownersFile": null,
+            "isPlain": false,
+            "isValidLegacyIssueTemplate": false,
+            "issueTemplate": null,
+            "discussionTemplate": null,
+            "language": "JSON",
+            "languageID": 174,
+            "large": false,
+            "planSupportInfo": {
+                "repoIsFork": null,
+                "repoOwnedByCurrentUser": null,
+                "requestFullPath": "/marcoincipini/Progetto-Software-Security/blob/main/temp.json",
+                "showFreeOrgGatedFeatureMessage": null,
+                "showPlanSupportBanner": null,
+                "upgradeDataAttributes": null,
+                "upgradePath": null
+            },
+            "publishBannersInfo": {
+                "dismissActionNoticePath": "/settings/dismiss-notice/publish_action_from_dockerfile",
+                "releasePath": "/marcoincipini/Progetto-Software-Security/releases/new?marketplace=true",
+                "showPublishActionBanner": false
+            },
+            "rawBlobUrl": "https://github.com/marcoincipini/Progetto-Software-Security/raw/main/temp.json",
+            "renderImageOrRaw": false,
+            "richText": null,
+            "renderedFileInfo": null,
+            "shortPath": null,
+            "symbolsEnabled": true,
+            "tabSize": 8,
+            "topBannersInfo": {
+                "overridingGlobalFundingFile": false,
+                "globalPreferredFundingPath": null,
+                "showInvalidCitationWarning": false,
+                "citationHelpUrl": "https://docs.github.com/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-citation-files",
+                "actionsOnboardingTip": null
+            },
+            "truncated": false,
+            "viewable": true,
+            "workflowRedirectUrl": null,
+            "symbols": {
+                "timed_out": false,
+                "not_analyzed": true,
+                "symbols": []
+            }
+        },
+        "copilotInfo": {
+            "documentationUrl": "https://docs.github.com/copilot/overview-of-github-copilot/about-github-copilot-for-individuals",
+            "notices": {
+                "codeViewPopover": {
+                    "dismissed": false,
+                    "dismissPath": "/settings/dismiss-notice/code_view_copilot_popover"
+                }
+            },
+            "userAccess": {
+                "hasSubscriptionEnded": false,
+                "orgHasCFBAccess": false,
+                "userHasCFIAccess": false,
+                "userHasOrgs": false,
+                "userIsOrgAdmin": false,
+                "userIsOrgMember": false,
+                "business": null,
+                "featureRequestInfo": null
+            }
+        },
+        "copilotAccessAllowed": false,
+        "csrf_tokens": {
+            "/marcoincipini/Progetto-Software-Security/branches": {
+                "post": "oMnlrLEPkmpDVsKSvCTemuzmagDCkbBUKZrQc9DuBUwavKTFgDqp5bXUSLgLlndAczE9ShCVpsHs5fggEkRA2w"
+            },
+            "/repos/preferences": {
+                "post": "BTztGia6mDEonxTNkSEi-h5dNUCyCcc7Kz9eFJyXmGQC3xmsT98YXTvRw7GRi-g-upZGNeYefVFartY9tCSUkw"
+            }
+        }
+    },
+    "title": "Progetto-Software-Security/temp.json at main · marcoincipini/Progetto-Software-Security"
+}

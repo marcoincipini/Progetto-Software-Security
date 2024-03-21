@@ -1,0 +1,113 @@
+[
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Marino",
+        "Data inizio": "15/03/2024",
+        "Data fine": "09/04/2024",
+        "Medicina": "Insulina",
+        "Dosaggio": "10 UI",
+        "Procedura": "Terapia insulinica"
+    },
+    
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Moretti",
+        "Data inizio": "11/09/2023",
+        "Data fine": "10/12/2023",
+        "Medicina": "Azitromicina",
+        "Dosaggio": "250 mg",
+        "Procedura": "Riposo"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Libanese",
+        "Data inizio": "11/07/2023",
+        "Data fine": "31/07/2023",
+        "Medicina": "Insulina",
+        "Dosaggio": "12 UI",
+        "Procedura": "Terapia insulinica"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Romano",
+        "Data inizio": "28/02/2023",
+        "Data fine": "25/03/2023",
+        "Medicina": "Azitromicina",
+        "Dosaggio": "500 mg",
+        "Procedura": "Riposo"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. De Santis",
+        "Data inizio": "31/10/2023",
+        "Data fine": "20/11/2023",
+        "Medicina": "Insulina",
+        "Dosaggio": "15 UI",
+        "Procedura": "Terapia insulinica"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Secco",
+        "Data inizio": "01/08/2023",
+        "Data fine": "30/10/2023",
+        "Medicina": "Ibuprofene",
+        "Dosaggio": "800 mg",
+        "Procedura": "Terapia fisica"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Rizzo",
+        "Data inizio": "05/05/2023",
+        "Data fine": "13/08/2023",
+        "Medicina": "Fluoxetina",
+        "Dosaggio": "20 mg",
+        "Procedura": "Terapia psicologica"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Conti",
+        "Data inizio": "09/10/2023",
+        "Data fine": "29/10/2023",
+        "Medicina": "Paracetamolo",
+        "Dosaggio": "500 mg",
+        "Procedura": "Riposo"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Colle",
+        "Data inizio": "28/09/2023",
+        "Data fine": "18/10/2023",
+        "Medicina": "Sertralina",
+        "Dosaggio": "50 mg",
+        "Procedura": "Terapia psicologica"
+    },
+    {
+        "IDPaziente": 5,
+        "Nome": "Giuseppe",
+        "Cognome": "Gialli",
+        "Operatore": "Dr. Ricci",
+        "Data inizio": "10/10/2023",
+        "Data fine": "07/11/2023",
+        "Medicina": "Ibuprofene",
+        "Dosaggio": "400 mg",
+        "Procedura": "Terapia fisica"
+    }
+]
