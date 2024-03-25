@@ -13,13 +13,13 @@ contract GestioneADI {
     // Struttura informazioni attrezzature (hash)
     struct attrezzature {
         address paziente;
-        bytes attrezzatura;
+        string attrezzatura;
     }
 
     // Struttura informazioni terapie (hash)
     struct terapie {
         address paziente;
-        bytes terapia;
+        string terapia;
     }
 
     // Struttura gestione delle conferme
@@ -70,14 +70,14 @@ contract GestioneADI {
         operatori.push(_operatore);
     }
 
-    function setAttrezzatura(address _pz, bytes memory _att) public{
+    function setAttrezzatura(address _pz, string memory _att) public{
         require(msg.sender == asur, "Utente senza privilegi necessari");
         require(ckpaziente(_pz), "Paziente inesistente");
 
         listaattrezzatura.push(attrezzature(_pz, _att));
     }
 
-    function setTerapia(address _pz, bytes memory _ter) public{
+    function setTerapia(address _pz, string memory _ter) public{
         require(ckmedico(msg.sender), "Medico inesistente");
         require(ckpaziente(_pz), "Paziente inesistente");
         require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
@@ -134,7 +134,7 @@ contract GestioneADI {
         return false;
     }
 
-    function ckattrezzature(address _pz) public view returns (bytes memory hashcode){
+    function ckattrezzature(address _pz) public view returns (string memory hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
         for (uint256 i=0; i < listaattrezzatura.length; i++){
             if(listaattrezzatura[i].paziente == _pz){
@@ -144,7 +144,7 @@ contract GestioneADI {
         }
     }
 
-    function ckterapie(address _pz) public view returns (bytes memory hashcode){
+    function ckterapie(address _pz) public view returns (string memory hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
         for (uint256 i=0; i < listaterapie.length; i++){
             if(listaterapie[i].paziente == _pz){
@@ -154,9 +154,9 @@ contract GestioneADI {
         }
     }
 
-    function getTerapia(address _pz) public view returns (bytes memory hashcode){
+    function getTerapia(address _pz) public view returns (string memory hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
-        //require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");
+        require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");
         return ckterapie(_pz);
     }
 

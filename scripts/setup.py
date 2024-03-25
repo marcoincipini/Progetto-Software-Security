@@ -38,7 +38,8 @@ def main():
         contratto.setTerapia(accounts[item],bytes(hash,'utf-8'),{'from':accounts[medicoC]})
         #print(pinata.get_file_from_pinata(hash))
         # contratto.setTerapia(accounts[i],hash,{'from':accounts[0]})
-    res= contratto.getTerapia(accounts[1]),{'from':accounts[1]}
-    print(res[0].decode())
-
+    res= contratto.getTerapia(accounts[1],{'from':accounts[1]})
+    print(type(res))
+    print(res)
+    
     return contratto
