@@ -92,8 +92,10 @@ contract GestioneADI {
         conferma.push(conferme(_pz, _op, _prest));
     }
 
-    function confermaOperatore(address _pz, address _op, string memory _prest, uint256 _i) public{
-        validazione.push(conferme(_pz, _op, _prest));
+    function confermaOperatore(uint256 _lat, uint256 _lon,  uint256 _i) public{
+        conferme memory prestazione = conferma[_i];
+        require(cklocpaziente(_lat, _lon, prestazione.paziente), "Operatore non localizzato");
+        validazione.push(prestazione);
         delete conferma[_i];
     }
 
@@ -116,6 +118,16 @@ contract GestioneADI {
     function ckpaziente(address _pz) private view returns (bool){
         for (uint256 i=0; i < pazienti.length; i++){
             if (pazienti[i].pz == _pz){return true;}
+        }
+        return false;
+    }
+
+    function cklocpaziente(uint256 _lat, uint256 _lon, address _pz) private view returns (bool){
+        for (uint256 i=0; i < pazienti.length; i++){
+            if (pazienti[i].pz == _pz){
+                if ((pazienti[i].lat==_lat)||(pazienti[i].lon==_lon)){return true;}
+                return false;
+            }
         }
         return false;
     }

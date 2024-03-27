@@ -3,7 +3,7 @@ import json
 import pinata
 
 # Devo sempre definire un metodo main
-# Il setup serve a sviluppare ul contratto da utilizzare ed inserire i dati iniziali.
+# Il setup serve a sviluppare il contratto da utilizzare ed inserire i dati iniziali.
 def main():
     # Deploy del contratto GestioneADI con l'account principale
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
@@ -41,5 +41,11 @@ def main():
     res= contratto.getTerapia(accounts[1],{'from':accounts[1]})
     print(type(res))
     print(res)
-    
+
+    with open('scripts/conferme.json','r') as file:
+        conferme = json.load(file)
+    for item in conferme:
+        contratto.setConferma(accounts[item['IDPaziente']],accounts[item['Operatore']],item['Procedura'])
+
+
     return contratto
