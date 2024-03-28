@@ -34,8 +34,8 @@ contract GestioneADI {
     address[] private medici;               // Array dei medici
     address[] private operatori;            // Array degli operatori sanitari
     address private asur;                   // Account amministratore
-    attrezzature[] private listaattrezzatura;  // Array delle attrezzature (hash)
-    terapie[] private listaterapie;            // Array delle terapie (1 per paziente) (hash)
+    attrezzature[] private listaattrezzatura;   // Array delle attrezzature (hash)
+    terapie[] private listaterapie;         // Array delle terapie (1 per paziente) (hash)
     conferme[] private conferma;            // Array gestione delle conferme operatore
     conferme[] private validazione;         // Array gestione delle conferme paziente
 
@@ -47,7 +47,9 @@ contract GestioneADI {
         asur = _asur;
     }
 
-    // Setter di tutte le strutture
+    /**
+    SETTER DI TUTTE LE STRUTTURE
+     */
     function SetRichieste(address _pz, uint8 _lat, uint8 _lon) public {
         richieste.push(paziente(_pz, _lat, _lon));
     }
@@ -99,7 +101,7 @@ contract GestioneADI {
         delete conferma[_i];
     }
 
-    // Remove della conferma (prestazione validata dal paziente)
+    // prestazione validata dal paziente
     function confermaPaziente(uint256 _i) public{
         require(_i < conferma.length, "indice inesistente!!");
 
@@ -114,7 +116,9 @@ contract GestioneADI {
         medicoCurante[_pz] = _md;
     }
 
-    // Controlli sulla presenza di un valore negli array
+    /**
+    CONTROLLI SULLA PRESENZA DI VALORI NEGLI ARRAY
+     */
     function ckpaziente(address _pz) private view returns (bool){
         for (uint256 i=0; i < pazienti.length; i++){
             if (pazienti[i].pz == _pz){return true;}
@@ -166,6 +170,9 @@ contract GestioneADI {
         }
     }
 
+    /**
+    GETTER DELLE STRUTTURE DATI
+     */
     function getTerapia(address _pz) public view returns (string memory hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
         require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");

@@ -7,19 +7,22 @@ import pinata
 def main():
     # Deploy del contratto GestioneADI con l'account principale
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
-    #contratto.setPaziente(accounts[1],10,10)
-    
+
     # Associazione degli account ai vari ruoli
+    # Apertura del file contenente le informazioni sui pazienti
     with open('scripts/pazienti.json','r') as file:
         pazienti = json.load(file)
     
+    # Assegnazione account 1-5 ai pazienti
     for item in pazienti:
         contratto.setPaziente(accounts[item['ID']],item['Latitudine'],item['Longitudine'],{'from':accounts[0]})
+    # Assegnazione account 6-7 ai medici
     for item in range(6,8):
         contratto.setMedico(accounts[item],{'from':accounts[0]})
+    # Assegnazione account 8-9 agli operatori
     for item in range(8,10):
         contratto.setOperatore(accounts[item],{'from':accounts[0]})
-    
+    # Associazione dei pazienti al relativo medico curante
     for item in range(1,6):
         i= 6 if (item%2) else 7
         print(i)
@@ -27,8 +30,10 @@ def main():
         print(item)
 
     # Creazione di un set di dati di prova per ogni struttura
+    # Apertura del file contenente le terapie
     with open('scripts/terapie.json','r') as file:
         terapie = json.load(file)
+    # Carico i dati delle terapie di ogni paziente
     for item in range(1,6):
         dati= list(filter(lambda x:x["IDPaziente"]==item,terapie))
         with open('temp.json','w') as file:
@@ -36,16 +41,14 @@ def main():
         hash=pinata.upload_to_pinata('temp.json')
         medicoC= 6 if (item%2) else 7
         contratto.setTerapia(accounts[item],bytes(hash,'utf-8'),{'from':accounts[medicoC]})
-        #print(pinata.get_file_from_pinata(hash))
-        # contratto.setTerapia(accounts[i],hash,{'from':accounts[0]})
-    res= contratto.getTerapia(accounts[1],{'from':accounts[1]})
-    print(type(res))
-    print(res)
-
+    # Apertura del file contenente le prestazioni da confermare
     with open('scripts/conferme.json','r') as file:
         conferme = json.load(file)
+    # Carico i dati relativi alle conferme
     for item in conferme:
         contratto.setConferma(accounts[item['IDPaziente']],accounts[item['Operatore']],item['Procedura'])
 
+    temp=contratto.getConferme()
+    print(temp)
 
     return contratto
