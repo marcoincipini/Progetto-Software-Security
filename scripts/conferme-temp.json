@@ -5,8 +5,7 @@
     "Cognome": "Neri",
     "Operatore": 8,
     "Data": "01/03/2024",
-    "Procedura": "Fisioterapia",
-    "ID": "2072"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 2,
@@ -14,8 +13,7 @@
     "Cognome": "Bianchi",
     "Operatore": 8,
     "Data": "28/02/2024",
-    "Procedura": "Prelievo",
-    "ID": "1771"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 3,
@@ -23,8 +21,7 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "05/03/2024",
-    "Procedura": "Analisi",
-    "ID": "6045"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 4,
@@ -32,8 +29,7 @@
     "Cognome": "Aranci",
     "Operatore": 9,
     "Data": "10/03/2024",
-    "Procedura": "Fisioterapia",
-    "ID": "4939"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 5,
@@ -41,8 +37,7 @@
     "Cognome": "Gialli",
     "Operatore": 9,
     "Data": "15/03/2024",
-    "Procedura": "Prelievo",
-    "ID": "4380"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 1,
@@ -50,8 +45,7 @@
     "Cognome": "Neri",
     "Operatore": 8,
     "Data": "12/03/2024",
-    "Procedura": "Analisi",
-    "ID": "7308"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 2,
@@ -59,8 +53,7 @@
     "Cognome": "Bianchi",
     "Operatore": 9,
     "Data": "18/04/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "7627"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 3,
@@ -68,8 +61,7 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "20/06/2023",
-    "Procedura": "Prelievo",
-    "ID": "2386"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 4,
@@ -77,8 +69,7 @@
     "Cognome": "Aranci",
     "Operatore": 8,
     "Data": "10/08/2023",
-    "Procedura": "Analisi",
-    "ID": "7973"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 5,
@@ -86,8 +77,7 @@
     "Cognome": "Gialli",
     "Operatore": 8,
     "Data": "11/09/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "3555"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 1,
@@ -95,8 +85,7 @@
     "Cognome": "Neri",
     "Operatore": 9,
     "Data": "09/09/2023",
-    "Procedura": "Prelievo",
-    "ID": "7621"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 2,
@@ -104,8 +93,7 @@
     "Cognome": "Bianchi",
     "Operatore": 9,
     "Data": "12/12/2023",
-    "Procedura": "Analisi",
-    "ID": "9067"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 3,
@@ -113,8 +101,7 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "01/02/2024",
-    "Procedura": "Fisioterapia",
-    "ID": "1498"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 4,
@@ -122,8 +109,7 @@
     "Cognome": "Aranci",
     "Operatore": 8,
     "Data": "28/01/2024",
-    "Procedura": "Prelievo",
-    "ID": "9530"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 5,
@@ -131,8 +117,7 @@
     "Cognome": "Gialli",
     "Operatore": 9,
     "Data": "11/07/2023",
-    "Procedura": "Analisi",
-    "ID": "2650"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 1,
@@ -140,8 +125,7 @@
     "Cognome": "Neri",
     "Operatore": 9,
     "Data": "30/03/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "5361"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 2,
@@ -149,8 +133,7 @@
     "Cognome": "Bianchi",
     "Operatore": 8,
     "Data": "11/11/2023",
-    "Procedura": "Prelievo",
-    "ID": "8524"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 3,
@@ -158,8 +141,7 @@
     "Cognome": "Rossi",
     "Operatore": 8,
     "Data": "15/04/2023",
-    "Procedura": "Analisi",
-    "ID": "2617"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 4,
@@ -167,8 +149,7 @@
     "Cognome": "Aranci",
     "Operatore": 9,
     "Data": "24/06/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "8616"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 5,
@@ -176,8 +157,7 @@
     "Cognome": "Gialli",
     "Operatore": 9,
     "Data": "28/02/2023",
-    "Procedura": "Prelievo",
-    "ID": "4398"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 1,
@@ -185,8 +165,7 @@
     "Cognome": "Neri",
     "Operatore": 9,
     "Data": "09/05/2023",
-    "Procedura": "Analisi",
-    "ID": "3803"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 2,
@@ -194,8 +173,7 @@
     "Cognome": "Bianchi",
     "Operatore": 8,
     "Data": "14/03/2024",
-    "Procedura": "Fisioterapia",
-    "ID": "4762"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 3,
@@ -203,8 +181,7 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "20/02/2023",
-    "Procedura": "Prelievo",
-    "ID": "5828"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 4,
@@ -212,8 +189,7 @@
     "Cognome": "Aranci",
     "Operatore": 9,
     "Data": "08/10/2023",
-    "Procedura": "Analisi",
-    "ID": "4366"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 5,
@@ -221,8 +197,7 @@
     "Cognome": "Gialli",
     "Operatore": 8,
     "Data": "31/10/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "9556"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 1,
@@ -230,8 +205,7 @@
     "Cognome": "Neri",
     "Operatore": 8,
     "Data": "27/12/2023",
-    "Procedura": "Prelievo",
-    "ID": "1664"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 2,
@@ -239,8 +213,7 @@
     "Cognome": "Bianchi",
     "Operatore": 9,
     "Data": "08/01/2024",
-    "Procedura": "Analisi",
-    "ID": "6864"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 3,
@@ -248,8 +221,7 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "10/10/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "5730"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 4,
@@ -257,8 +229,7 @@
     "Cognome": "Aranci",
     "Operatore": 9,
     "Data": "18/12/2023",
-    "Procedura": "Prelievo",
-    "ID": "3479"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 5,
@@ -266,8 +237,7 @@
     "Cognome": "Gialli",
     "Operatore": 8,
     "Data": "01/08/2023",
-    "Procedura": "Analisi",
-    "ID": "8884"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 1,
@@ -275,8 +245,7 @@
     "Cognome": "Neri",
     "Operatore": 9,
     "Data": "06/06/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "8179"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 2,
@@ -284,8 +253,7 @@
     "Cognome": "Bianchi",
     "Operatore": 9,
     "Data": "11/08/2023",
-    "Procedura": "Prelievo",
-    "ID": "3677"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 3,
@@ -293,8 +261,7 @@
     "Cognome": "Rossi",
     "Operatore": 8,
     "Data": "14/09/2023",
-    "Procedura": "Analisi",
-    "ID": "4809"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 4,
@@ -302,8 +269,7 @@
     "Cognome": "Aranci",
     "Operatore": 8,
     "Data": "02/12/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "6143"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 5,
@@ -311,8 +277,7 @@
     "Cognome": "Gialli",
     "Operatore": 9,
     "Data": "05/05/2023",
-    "Procedura": "Prelievo",
-    "ID": "1117"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 1,
@@ -320,8 +285,7 @@
     "Cognome": "Neri",
     "Operatore": 9,
     "Data": "02/05/2023",
-    "Procedura": "Analisi",
-    "ID": "3621"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 2,
@@ -329,8 +293,7 @@
     "Cognome": "Bianchi",
     "Operatore": 9,
     "Data": "13/11/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "2251"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 3,
@@ -338,8 +301,7 @@
     "Cognome": "Rossi",
     "Operatore": 8,
     "Data": "17/01/2024",
-    "Procedura": "Prelievo",
-    "ID": "7546"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 4,
@@ -347,8 +309,7 @@
     "Cognome": "Aranci",
     "Operatore": 9,
     "Data": "19/01/2024",
-    "Procedura": "Analisi",
-    "ID": "8803"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 5,
@@ -356,8 +317,7 @@
     "Cognome": "Gialli",
     "Operatore": 9,
     "Data": "09/10/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "7996"
+    "Procedura": "Fisioterapia"
   },
   {
     "IDPaziente": 1,
@@ -365,8 +325,7 @@
     "Cognome": "Neri",
     "Operatore": 8,
     "Data": "06/01/2024",
-    "Procedura": "Prelievo",
-    "ID": "5928"
+    "Procedura": "Prelievo"
   },
   {
     "IDPaziente": 2,
@@ -374,8 +333,7 @@
     "Cognome": "Bianchi",
     "Operatore": 8,
     "Data": "02/02/2024",
-    "Procedura": "Analisi",
-    "ID": "6551"
+    "Procedura": "Analisi"
   },
   {
     "IDPaziente": 3,
@@ -383,7 +341,6 @@
     "Cognome": "Rossi",
     "Operatore": 9,
     "Data": "17/07/2023",
-    "Procedura": "Fisioterapia",
-    "ID": "8153"
+    "Procedura": "Fisioterapia"
   }
 ]

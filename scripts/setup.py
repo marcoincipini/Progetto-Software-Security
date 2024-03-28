@@ -46,9 +46,9 @@ def main():
         conferme = json.load(file)
     # Carico i dati relativi alle conferme
     for item in conferme:
-        contratto.setConferma(accounts[item['IDPaziente']],accounts[item['Operatore']],item['Procedura'])
+        contratto.setConferma(accounts[item['IDPaziente']],accounts[item['Operatore']],item['Procedura'],item['ID'],{'from':accounts[0]})
 
     temp=contratto.getConferme()
-    print(temp)
+    print(temp[1])
 
     return contratto

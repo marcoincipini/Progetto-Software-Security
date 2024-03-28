@@ -27,6 +27,7 @@ contract GestioneADI {
         address paziente;
         address operatore;
         string prestazione;
+        string id;
     }
 
     paziente[] private richieste;           // Array delle richieste ADI
@@ -87,11 +88,12 @@ contract GestioneADI {
         listaterapie.push(terapie(_pz, _ter));
     }
 
-    function setConferma(address _pz, address _op, string memory _prest) public{
+    function setConferma(address _pz, address _op, string memory _prest, string memory _id) public{
         require(ckpaziente(_pz), "Paziente inesistente");
         require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
+        require(msg.sender == asur || medicoCurante[_pz]==msg.sender, "Utente senza privilegi necessari");
 
-        conferma.push(conferme(_pz, _op, _prest));
+        conferma.push(conferme(_pz, _op, _prest, _id));
     }
 
     function confermaOperatore(uint256 _lat, uint256 _lon,  uint256 _i) public{
