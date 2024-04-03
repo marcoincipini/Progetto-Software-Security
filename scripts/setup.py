@@ -48,7 +48,7 @@ def main():
     for item in conferme:
         contratto.setConferma(accounts[item['IDPaziente']],accounts[item['Operatore']],item['Procedura'],item['ID'],{'from':accounts[0]})
 
-    temp=contratto.getConferme()
-    print(temp[1])
+    temp=contratto.getConferme({'from':accounts[8]})
+    print(temp)
 
     return contratto

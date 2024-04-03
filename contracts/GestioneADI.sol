@@ -181,13 +181,62 @@ contract GestioneADI {
         return ckterapie(_pz);
     }
 
-    function getConferme() public view returns (conferme[] memory){
+    function getConfermeall() public view returns (conferme[] memory){
+        require(msg.sender == asur, "Utente senza privilegi necessari");
         return conferma;
+    }
 
+    function getConferme() public view returns (conferme[] memory) {
+        require(ckoperatore(msg.sender), "Utente senza privilegi necessari");
+        
+        // Creare un array dinamico temporaneo per memorizzare le conferme
+        conferme[] memory confOpTemp = new conferme[](conferma.length);
+        uint256 count = 0;
+
+        // Iterare attraverso l'array di conferme
+        for (uint256 i = 0; i < conferma.length; i++) {
+            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
+            if (conferma[i].operatore == msg.sender) {
+                confOpTemp[count] = conferma[i];
+                count++;
+            }
+        }
+
+        // Creare un nuovo array dinamico della dimensione corretta
+        conferme[] memory confOp = new conferme[](count);
+        
+        // Copiare gli elementi dall'array temporaneo al nuovo array di output
+        for (uint256 j = 0; j < count; j++) {
+            confOp[j] = confOpTemp[j];
+        }
+
+        return confOp;
     }
 
     function getValidazione() public view returns (conferme[] memory){
-        return validazione;
+        require(ckpaziente(msg.sender), "Utente senza privilegi necessari");
+        
+        // Creare un array dinamico temporaneo per memorizzare le conferme
+        conferme[] memory confOpTemp = new conferme[](validazione.length);
+        uint256 count = 0;
 
+        // Iterare attraverso l'array di conferme
+        for (uint256 i = 0; i < validazione.length; i++) {
+            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
+            if (validazione[i].operatore == msg.sender) {
+                confOpTemp[count] = validazione[i];
+                count++;
+            }
+        }
+
+        // Creare un nuovo array dinamico della dimensione corretta
+        conferme[] memory confOp = new conferme[](count);
+        
+        // Copiare gli elementi dall'array temporaneo al nuovo array di output
+        for (uint256 j = 0; j < count; j++) {
+            confOp[j] = confOpTemp[j];
+        }
+
+        return confOp;
     }
 }
