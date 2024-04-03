@@ -59,10 +59,12 @@ def main():
     
     return contratto
 '''
+'''
 def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     utenti(contratto)
     attrezzature(contratto)
+'''
 
 
 def utenti(contratto):

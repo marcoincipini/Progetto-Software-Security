@@ -6,3 +6,4 @@ build/
 reports/
 .stignore
 temp.json
+.vs/
