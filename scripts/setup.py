@@ -63,6 +63,7 @@ def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     utenti(contratto)
     attrezzature(contratto)
+    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[1]}),)
 
 
 def utenti(contratto):
@@ -114,7 +115,4 @@ def attrezzature(contratto):
         attrezzature=json.load(file)
     # Carico il file attrezzature su pinata e sulla blockchain
     for item in attrezzature:
-        with open('temp.json','w') as ftemp:
-            json.dump(item,ftemp)
-            hash=pinata.upload_to_pinata('temp.json')
-        contratto.setAttrezzatura(accounts[item['IDPaziente']],hash)
+        contratto.setAttrezzatura(accounts[item['IDPaziente']],item['IDDispositivo'],item['Tipologia dispositivo'],{'from':accounts[0]})
