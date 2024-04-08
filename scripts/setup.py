@@ -1,6 +1,6 @@
 from brownie import accounts, network, Contract, GestioneADI
 import json
-import pinata
+import scripts.pinata as pinata
 '''
 # Devo sempre definire un metodo main
 # Il setup serve a sviluppare il contratto da utilizzare ed inserire i dati iniziali.
@@ -63,7 +63,8 @@ def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     utenti(contratto)
     attrezzature(contratto)
-    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[1]}),)
+    terapie(contratto)
+    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[2]}),)
 
 
 def utenti(contratto):
