@@ -13,7 +13,7 @@ contract GestioneADI {
     // Struttura informazioni attrezzature (hash)
     struct attrezzature {
         address paziente;
-        string attrezzatura;
+        bytes32 attrezzatura;
     }
 
     // Struttura informazioni terapie (hash)
@@ -73,11 +73,11 @@ contract GestioneADI {
         operatori.push(_operatore);
     }
 
-    function setAttrezzatura(address _pz, string memory _att) public{
+    function setAttrezzatura(address _pz, uint256 _id, string memory _att) public{
         require(msg.sender == asur, "Utente senza privilegi necessari");
         require(ckpaziente(_pz), "Paziente inesistente");
-
-        listaattrezzatura.push(attrezzature(_pz, _att));
+        bytes32 _hash = keccak256(abi.encode(_pz,_id,_att));
+        listaattrezzatura.push(attrezzature(_pz, _hash));
     }
 
     function setTerapia(address _pz, string memory _ter) public{
@@ -152,7 +152,7 @@ contract GestioneADI {
         return false;
     }
 
-    function ckattrezzature(address _pz) public view returns (string memory hashcode){
+    function ckattrezzature(address _pz) public view returns (bytes32 hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
         for (uint256 i=0; i < listaattrezzatura.length; i++){
             if(listaattrezzatura[i].paziente == _pz){
@@ -175,6 +175,12 @@ contract GestioneADI {
     /**
     GETTER DELLE STRUTTURE DATI
      */
+    
+    function getRichieste() public view returns (paziente[] memory){
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        return richieste;
+    }
+    
     function getTerapia(address _pz) public view returns (string memory hashcode){
         require(ckpaziente(_pz), "Paziente inesistente");
         require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");
@@ -238,5 +244,15 @@ contract GestioneADI {
         }
 
         return confOp;
+    }
+    
+    /**
+    Validazione dei dati stream
+     */
+    function validaRilevazione(address _pz, uint256 _id, string memory _att) public view returns (bool){
+        require(ckpaziente(_pz), "Paziente inesistente");
+        require(msg.sender==_pz, "Paziente non autorizzato");
+        return (keccak256(abi.encode(_pz,_id,_att))==ckattrezzature(_pz));
+
     }
 }

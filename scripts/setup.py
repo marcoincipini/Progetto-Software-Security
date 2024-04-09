@@ -1,6 +1,6 @@
 from brownie import accounts, network, Contract, GestioneADI
 import json
-import pinata
+import scripts.pinata as pinata
 '''
 # Devo sempre definire un metodo main
 # Il setup serve a sviluppare il contratto da utilizzare ed inserire i dati iniziali.
@@ -59,12 +59,13 @@ def main():
     
     return contratto
 '''
-'''
+
 def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     utenti(contratto)
     attrezzature(contratto)
-'''
+    terapie(contratto)
+    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[2]}),)
 
 
 def utenti(contratto):
@@ -116,7 +117,4 @@ def attrezzature(contratto):
         attrezzature=json.load(file)
     # Carico il file attrezzature su pinata e sulla blockchain
     for item in attrezzature:
-        with open('temp.json','w') as ftemp:
-            json.dump(item,ftemp)
-            hash=pinata.upload_to_pinata('temp.json')
-        contratto.setAttrezzatura(accounts[item['IDPaziente']],hash)
+        contratto.setAttrezzatura(accounts[item['IDPaziente']],item['IDDispositivo'],item['Tipologia dispositivo'],{'from':accounts[0]})
