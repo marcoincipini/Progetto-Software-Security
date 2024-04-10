@@ -61,6 +61,16 @@ contract GestioneADI {
         pazienti.push(paziente(_pz, _lat, _lon));
     }
 
+    function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) public {
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        setPaziente(_pz, _lat, _lon);
+        
+        for (uint i = _index; i < richieste.length - 1; i++) {
+            richieste[i] = richieste[i + 1];
+        }
+        richieste.pop(); //al posto di delete altrimenti viene lasciato un elemento 0x0000 al posto di quello da rimuovere
+    }
+
     function setMedico(address _medico) public{
         require(msg.sender == asur, "Utente senza privilegi necessari");
 
