@@ -85,9 +85,7 @@ def utenti(contratto):
     # Associazione dei pazienti al relativo medico curante
     for item in range(1,6):
         i= 6 if (item%2) else 7
-        print(i)
         contratto.setmedicoCurante(accounts[item],accounts[i])
-        print(item)
 
 def terapie(contratto):
     # Apertura del file contenente le terapie

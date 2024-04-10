@@ -96,18 +96,36 @@ contract GestioneADI {
         conferma.push(conferme(_pz, _op, _prest, _id));
     }
 
-    function confermaOperatore(uint256 _lat, uint256 _lon,  uint256 _i) public{
-        conferme memory prestazione = conferma[_i];
-        require(cklocpaziente(_lat, _lon, prestazione.paziente), "Operatore non localizzato");
+    function confermaOperatore(uint256 _lat, uint256 _lon,  string memory _id) public{
+        require(ckoperatore(msg.sender), "Account non operatore!");
+        conferme memory prestazione;
+        uint256 indice = 0;
+        for (uint256 i=0; i < conferma.length; i++){
+            if(keccak256(abi.encodePacked(conferma[i].id)) == keccak256(abi.encodePacked(_id))){
+                indice=i;
+                prestazione = conferma[i];
+                require(msg.sender == prestazione.operatore ,"Operatore non autorizzato!");
+            }
+        }
+        require(msg.sender == prestazione.operatore ,"ID inesistente!");
+        require(cklocpaziente(_lat, _lon, prestazione.paziente), "Operatore non localizzato!");
         validazione.push(prestazione);
-        delete conferma[_i];
+        delete conferma[indice];
     }
 
     // prestazione validata dal paziente
-    function confermaPaziente(uint256 _i) public{
-        require(_i < conferma.length, "indice inesistente!!");
+    function confermaPaziente(uint256 _id) public{
+        require(ckpaziente(msg.sender), "Account non paziente");
+        conferme memory prestazione;
+        uint256 indice = 0;
+        for (uint256 i=0; i < validazione.length; i++){
+            if(keccak256(abi.encodePacked(validazione[i].id)) == keccak256(abi.encodePacked(_id))){
+                indice=i;
+                prestazione = validazione[i];
+            }
+        }
 
-        delete validazione[_i];
+        delete validazione[indice];
     }
 
     // Setter del mapping paziente-medico
@@ -229,7 +247,7 @@ contract GestioneADI {
         // Iterare attraverso l'array di conferme
         for (uint256 i = 0; i < validazione.length; i++) {
             // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
-            if (validazione[i].operatore == msg.sender) {
+            if (validazione[i].paziente == msg.sender) {
                 confOpTemp[count] = validazione[i];
                 count++;
             }
