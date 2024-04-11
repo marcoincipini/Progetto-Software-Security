@@ -110,7 +110,10 @@ contract GestioneADI {
         require(msg.sender == prestazione.operatore ,"ID inesistente!");
         require(cklocpaziente(_lat, _lon, prestazione.paziente), "Operatore non localizzato!");
         validazione.push(prestazione);
-        delete conferma[indice];
+        for (uint256 index = indice; index < conferma.length-1; index++) {
+            conferma[index]=conferma[index+1];
+        }
+        conferma.pop();
     }
 
     // prestazione validata dal paziente
@@ -124,8 +127,10 @@ contract GestioneADI {
                 prestazione = validazione[i];
             }
         }
-
-        delete validazione[indice];
+        for (uint256 index = indice; index < validazione.length-1; index++) {
+            validazione[index]=validazione[index+1];
+        }
+        validazione.pop();
     }
 
     // Setter del mapping paziente-medico

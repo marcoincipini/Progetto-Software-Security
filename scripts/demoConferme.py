@@ -50,6 +50,8 @@ def main():
 
     print(contratto.getConferme({'from':accounts[8]}))
     print(contratto.getConferme({'from':accounts[9]}))
+    print(contratto.getConfermeall({'from':accounts[0]}))
+    
     print(contratto.getValidazione({'from':accounts[1]}))
     print(contratto.getValidazione({'from':accounts[2]}))
     print(contratto.getValidazione({'from':accounts[3]}))
