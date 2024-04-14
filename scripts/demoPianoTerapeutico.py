@@ -2,6 +2,7 @@ from brownie import accounts, network, Contract, GestioneADI
 import scripts.setup as set
 import scripts.pinata as pinata
 import json
+import datetime
 
 def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
@@ -39,11 +40,7 @@ def main():
                     print("Input non valido. Inserisci un numero intero.")
 
                 hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_med})
-                
-                #visualizzazione e modifica json:
-                json_terapia = pinata.get_file_from_pinata(hash_terapia) #json scaricato
-                for i,elemento in enumerate(json_terapia):
-                    print(f"{i+1}: {elemento}")
+                json_terapia = visualizzaJson(hash_terapia)
 
                 try:
                     selezione = int(input("Seleziona azione (0: Modifica piano terapeutico; 1: Aggiungi nuova terapia; altro intero: esci): "))
@@ -60,16 +57,15 @@ def main():
                                         pass
                                     else:
                                         nuovo_valore = input(f"Modifica elemento {chiave} (default: {valore}): ")
-                                        if nuovo_valore:
+                                        if checkValore(nuovo_valore,chiave):
                                             terapia_selezionata[chiave] = nuovo_valore
+                                        else:
+                                            if nuovo_valore:
+                                                print("Valore non valido! Verrà mantenuto il valore di default.")
                                 print("Terapia modificata:", terapia_selezionata)
-
                                 #upload su pinata e su blockchain
-                                with open("temp.json", "w") as file:
-                                    json.dump(json_terapia, file)
-                                hash = pinata.upload_to_pinata("temp.json")
-                                contratto.setTerapia(indirizzo_paz,bytes(hash,'utf-8'),{'from':indirizzo_med})
-                                hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_med})
+                                uploadTerapia(contratto,json_terapia,indirizzo_paz,indirizzo_med)
+
                             else:
                                 print("ID terapia non valido.")
                         except ValueError:
@@ -85,18 +81,15 @@ def main():
                             flag = True
                             while flag:
                                 nuovo_valore = input(f"Inserisci {chiave}: ")
-                                if nuovo_valore:
+                                if checkValore(nuovo_valore, chiave):
                                     nuova_terapia[chiave] = nuovo_valore
                                     flag = False
                                 else:
-                                    print("Devi inserire un valore!")
+                                    print("Inserisci un valore valido!")
                         json_terapia.append(nuova_terapia)
                         #upload su pinata e su blockchain
-                        with open("temp.json", "w") as file:
-                            json.dump(json_terapia, file)
-                        hash = pinata.upload_to_pinata("temp.json")
-                        contratto.setTerapia(indirizzo_paz,bytes(hash,'utf-8'),{'from':indirizzo_med})
-                        hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_med})
+                        uploadTerapia(contratto,json_terapia,indirizzo_paz,indirizzo_med)
+                        
                 except ValueError:
                     print("Scelta non valida... inserisci un numero intero.")
 
@@ -112,10 +105,7 @@ def main():
                         indirizzo_paz = paz[0]
                         hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_paz})
                 
-                        #visualizzazione json
-                        json_terapia = pinata.get_file_from_pinata(hash_terapia)
-                        for i,elemento in enumerate(json_terapia):
-                            print(f"{i+1}: {elemento}")
+                        visualizzaJson(hash_terapia)
                     else:
                         print("Selezione non valida.")                    
                 except ValueError:
@@ -127,3 +117,44 @@ def main():
                 menu1=False
         except ValueError:
             print("Scelta non valida... inserisci un numero intero.")
+
+def visualizzaJson(hash):
+    json_terapia = pinata.get_file_from_pinata(hash)
+    for i,elemento in enumerate(json_terapia):
+        print(f"{i+1}: {elemento}")
+    return json_terapia
+
+def uploadTerapia(contratto, json_terapia, indirizzo_paz, indirizzo_med):
+    with open("temp.json", "w") as file:
+        json.dump(json_terapia, file)
+    hash = pinata.upload_to_pinata("temp.json")
+    contratto.setTerapia(indirizzo_paz,bytes(hash,'utf-8'),{'from':indirizzo_med})
+
+def checkValore(nuovo_valore, chiave):
+    if nuovo_valore:
+        if chiave in ["Operatore", "Medicina"]:
+            if len(nuovo_valore) <= 50:
+                return True
+            else:
+                return False
+        elif chiave in ["Data inizio", "Data fine"]:
+            try:
+                datetime.datetime.strptime(nuovo_valore, '%d/%m/%Y') #controllo sulla data
+                return True
+            except ValueError:
+                return False
+        elif chiave == "Dosaggio":
+            if len(nuovo_valore) <= 20:
+                return True
+            else:
+                return False
+        elif chiave == "Procedura":
+            if len(nuovo_valore) <= 500:
+                return True
+            else:
+                return False
+        else:
+            print("Chiave non contemplata...")
+            return False
+    else:
+        return False
