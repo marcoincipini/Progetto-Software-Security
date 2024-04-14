@@ -10,7 +10,7 @@ def main():
     menu = True
     while(menu):
         try:
-            scelta = int(input("Seleziona azione (0: Invia una richiesta come nuovo paziente; 1: Visualizza/accetta richieste con l'utente ASUR; altro intero: esci) "))
+            scelta = int(input("Seleziona azione (0: Invia una richiesta come nuovo paziente; 1: Visualizza/accetta richieste con l'utente ASUR; altro intero: esci): "))
             if(scelta==0):
                 nuovo_ID = len(accounts)
                 i = True

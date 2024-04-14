@@ -68,7 +68,7 @@ contract GestioneADI {
         for (uint i = _index; i < richieste.length - 1; i++) {
             richieste[i] = richieste[i + 1];
         }
-        richieste.pop(); //al posto di delete altrimenti viene lasciato un elemento 0x0000 al posto di quello da rimuovere
+        richieste.pop();
     }
 
     function setMedico(address _medico) public{
@@ -94,7 +94,12 @@ contract GestioneADI {
         require(ckmedico(msg.sender), "Medico inesistente");
         require(ckpaziente(_pz), "Paziente inesistente");
         require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
-
+        //elimino, se c'è, la terapia precedente
+        for (uint i = 0; i < listaterapie.length; i++) {
+            if(listaterapie[i].paziente == _pz) {
+                delete listaterapie[i];
+        }
+    }
         listaterapie.push(terapie(_pz, _ter));
     }
 
@@ -255,7 +260,35 @@ contract GestioneADI {
 
         return confOp;
     }
+
+    function getMedici() public view returns (address[] memory){
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        return medici;
+    }
+
+    function getPazientiDelMedico(address medico) public view returns (address[] memory) {
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        address[] memory pazientiAssociatiTemp = new address[](pazienti.length);
+        uint256 count = 0;
+        for (uint256 i = 0; i < pazienti.length; i++) {
+            if (medicoCurante[pazienti[i].pz] == medico) {
+                pazientiAssociatiTemp[count] = pazienti[i].pz;
+                count++;
+            }
+        }
+
+        address[] memory pazientiAssociati = new address[](count);
+        for (uint256 j = 0; j < count; j++) {
+            pazientiAssociati[j] = pazientiAssociatiTemp[j];
+        }
+        return pazientiAssociati;
+    }
     
+    function getPazienti() public view returns (paziente[] memory){
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        return pazienti;
+    }
+
     /**
     Validazione dei dati stream
      */
