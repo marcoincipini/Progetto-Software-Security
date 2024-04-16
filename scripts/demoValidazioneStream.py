@@ -3,12 +3,7 @@ import scripts.setup as set
 import time
 import random
 import json
-"""
-simone = input("Digita Simone: ")
-print("fai sempre quello che ti dice ", simone)
-- generere dei dati random ogni n secondi
-- validare i dati 
-"""
+
 INTERVALLO=5
 
 def main():
