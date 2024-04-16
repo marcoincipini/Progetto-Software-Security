@@ -7,7 +7,7 @@ def main():
     utenti(contratto)
     attrezzature(contratto)
     terapie(contratto)
-    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[2]}),)
+    print(contratto.validaRilevazione(accounts[1],7043,"Monitor del ritmo cardiaco",{'from':accounts[2]}))
 
 
 def utenti(contratto):
