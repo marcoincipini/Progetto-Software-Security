@@ -115,15 +115,18 @@ contract GestioneADI {
         require(ckoperatore(msg.sender), "Account non operatore!");
         conferme memory prestazione;
         uint256 indice = 0;
+        bool flag=false;
         for (uint256 i=0; i < conferma.length; i++){
             if(keccak256(abi.encodePacked(conferma[i].id)) == keccak256(abi.encodePacked(_id))){
                 indice=i;
                 prestazione = conferma[i];
                 require(msg.sender == prestazione.operatore ,"Operatore non autorizzato!");
+                flag=true;
             }
         }
         require(msg.sender == prestazione.operatore ,"ID inesistente!");
         require(cklocpaziente(_lat, _lon, prestazione.paziente), "Operatore non localizzato!");
+        require(flag, "ID inesistente");
         validazione.push(prestazione);
         for (uint256 index = indice; index < conferma.length-1; index++) {
             conferma[index]=conferma[index+1];
@@ -132,16 +135,20 @@ contract GestioneADI {
     }
 
     // prestazione validata dal paziente
-    function confermaPaziente(uint256 _id) public{
+    function confermaPaziente(string memory _id) public{
         require(ckpaziente(msg.sender), "Account non paziente");
         conferme memory prestazione;
         uint256 indice = 0;
+        bool flag=false;
         for (uint256 i=0; i < validazione.length; i++){
             if(keccak256(abi.encodePacked(validazione[i].id)) == keccak256(abi.encodePacked(_id))){
                 indice=i;
                 prestazione = validazione[i];
+                flag=true;
             }
         }
+        require(msg.sender == prestazione.paziente ,"ID inesistente!");
+        require(flag, "ID inesistente");
         for (uint256 index = indice; index < validazione.length-1; index++) {
             validazione[index]=validazione[index+1];
         }

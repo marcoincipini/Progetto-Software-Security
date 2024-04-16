@@ -9,9 +9,9 @@ def main():
     with open('scripts/conferme.json','r') as file:
         conferme = json.load(file)
     
-    operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
+    operatore = int(input("Inserisci ID dell'operatore (8 - 9 - 0:exit): "))
     while not (operatore == 8 or operatore == 9 or operatore == 0):
-        operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
+        operatore = int(input("Inserisci ID dell'operatore (8 - 9 - 0:exit): "))
     while operatore!=0:
         lat = int(input("Inserisci latitudine della posizione (42): "))
         while not isinstance(lat, int):
@@ -26,10 +26,10 @@ def main():
                     print(i)
         _id = input("Inserire ID della prestazione da confermare: ")
         try:
-            contratto.confermaOperatore(lat,lon,_id,{'from':accounts[8]})
+            contratto.confermaOperatore(lat,lon,_id,{'from':accounts[operatore]})
         except Exception as ex:
             print("Errore rilevato nella conferma: ", ex)
-        operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
+        operatore = int(input("Inserisci ID dell'operatore (8 - 9 - 0:exit): "))
         while not (operatore==8 or operatore==9 or operatore == 0):
             operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
 
