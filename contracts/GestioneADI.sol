@@ -48,11 +48,13 @@ contract GestioneADI {
         asur = _asur;
     }
     
+    // modifier che controlla che l'utente sia ASUR
     modifier onlyASUR {
         require(msg.sender == asur, "Utente senza privilegi necessari");
         _;
     }
 
+    // modifier che controlla l'esistenza di un paziente
     modifier checkEsistenzaPz(address _pz) {
         require(ckpaziente(_pz), "Paziente inesistente");
         _;
@@ -69,6 +71,7 @@ contract GestioneADI {
         pazienti.push(paziente(_pz, _lat, _lon));
     }
 
+    // setter per un paziente che viene inserito attraverso una sua richiesta ADI
     function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) onlyASUR public {
         setPaziente(_pz, _lat, _lon);
         
@@ -94,7 +97,7 @@ contract GestioneADI {
     function setTerapia(address _pz, string memory _ter) checkEsistenzaPz(_pz) public{
         require(ckmedico(msg.sender), "Medico inesistente");
         require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
-        //elimino, se c'è, la terapia precedente
+        // se è presente, elimino la terapia precedente
         for (uint i = 0; i < listaterapie.length; i++) {
             if(listaterapie[i].paziente == _pz) {
                 delete listaterapie[i];
@@ -233,23 +236,23 @@ contract GestioneADI {
     function getConferme() public view returns (conferme[] memory) {
         require(ckoperatore(msg.sender), "Utente senza privilegi necessari");
         
-        // Creare un array dinamico temporaneo per memorizzare le conferme
+        // Crea un array dinamico temporaneo per memorizzare le conferme
         conferme[] memory confOpTemp = new conferme[](conferma.length);
         uint256 count = 0;
 
-        // Iterare attraverso l'array di conferme
+        // Itera le conferme
         for (uint256 i = 0; i < conferma.length; i++) {
-            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
+            // Se l'operatore corrente è l'utente chiamante, aggiunge la conferma all'array temporaneo
             if (conferma[i].operatore == msg.sender) {
                 confOpTemp[count] = conferma[i];
                 count++;
             }
         }
 
-        // Creare un nuovo array dinamico della dimensione corretta
+        // Crea un nuovo array dinamico della dimensione corretta
         conferme[] memory confOp = new conferme[](count);
         
-        // Copiare gli elementi dall'array temporaneo al nuovo array di output
+        // Copia gli elementi dall'array temporaneo al nuovo array di output
         for (uint256 j = 0; j < count; j++) {
             confOp[j] = confOpTemp[j];
         }
@@ -260,23 +263,17 @@ contract GestioneADI {
     function getValidazione() public view returns (conferme[] memory){
         require(ckpaziente(msg.sender), "Utente senza privilegi necessari");
         
-        // Creare un array dinamico temporaneo per memorizzare le conferme
         conferme[] memory confOpTemp = new conferme[](validazione.length);
         uint256 count = 0;
 
-        // Iterare attraverso l'array di conferme
         for (uint256 i = 0; i < validazione.length; i++) {
-            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
             if (validazione[i].paziente == msg.sender) {
                 confOpTemp[count] = validazione[i];
                 count++;
             }
         }
 
-        // Creare un nuovo array dinamico della dimensione corretta
         conferme[] memory confOp = new conferme[](count);
-        
-        // Copiare gli elementi dall'array temporaneo al nuovo array di output
         for (uint256 j = 0; j < count; j++) {
             confOp[j] = confOpTemp[j];
         }
@@ -288,6 +285,7 @@ contract GestioneADI {
         return medici;
     }
 
+    // ritorna gli indirizzi di tutti i pazienti associati ad un medico
     function getPazientiDelMedico(address medico) onlyASUR public view returns (address[] memory) {
         address[] memory pazientiAssociatiTemp = new address[](pazienti.length);
         uint256 count = 0;
@@ -312,6 +310,7 @@ contract GestioneADI {
     /**
     Validazione dei dati stream
      */
+     
     function validaRilevazione(address _pz, uint256 _id, string memory _att) checkEsistenzaPz(_pz) public view returns (bool){
         require(msg.sender==_pz, "Paziente non autorizzato");
         return (keccak256(abi.encode(_pz,_id,_att))==ckattrezzature(_pz));

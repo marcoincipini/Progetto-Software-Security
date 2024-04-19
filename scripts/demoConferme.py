@@ -1,7 +1,10 @@
 from brownie import accounts, GestioneADI
 import scripts.setup as set
 import json
-
+'''
+demo: l'operatore indica l'esecuzione di una prestazione presso un paziente
+    il paziente conferma la prestazione selezionata dall'operatore
+'''
 def main():
     contratto = GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     set.utenti(contratto)
@@ -9,6 +12,7 @@ def main():
     with open('scripts/conferme.json','r') as file:
         conferme = json.load(file)
     
+    # selezione di un operatore che deve indicare quale tra le prestazioni da eseguire vuole confermare
     operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
     while not (operatore == 8 or operatore == 9 or operatore == 0):
         operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
@@ -24,7 +28,7 @@ def main():
             for i in conferme:
                 if i['ID']==item[3]:
                     print(i)
-        _id = input("Inserire ID della prestazione da confermare: ")
+        _id = input("Inserire ID della prestazione da confermare: ") #l'ID della prestazione è quella indicata nel JSON
         try:
             contratto.confermaOperatore(lat,lon,_id,{'from':accounts[8]})
         except Exception as ex:
@@ -33,6 +37,7 @@ def main():
         while not (operatore==8 or operatore==9 or operatore == 0):
             operatore = int(input("Inserisci ID dell'operatore (8 - 9): "))
 
+    # selezione di un paziente che deve confermare l'esecuzione della prestazione indicata dall'operatore
     try:
         paziente = int(input("Inserisci ID del paziente (1-5): "))
         while paziente>5 or paziente<0:
@@ -51,8 +56,11 @@ def main():
     except ValueError:
         print("Selezione non valida...")
 
+    # stampa l'attuale situazione della blockchain
+    # conferme:
     print(contratto.getConferme({'from':accounts[8]}))
     print(contratto.getConferme({'from':accounts[9]}))
+    # transazioni in sospeso per ogni utente:
     print(contratto.getValidazione({'from':accounts[1]}))
     print(contratto.getValidazione({'from':accounts[2]}))
     print(contratto.getValidazione({'from':accounts[3]}))

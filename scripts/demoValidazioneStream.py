@@ -3,13 +3,11 @@ import scripts.setup as set
 import time
 import random
 import json
-"""
-simone = input("Digita Simone: ")
-print("fai sempre quello che ti dice ", simone)
-- generere dei dati random ogni n secondi
-- validare i dati 
-"""
-INTERVALLO=5
+'''
+demo: le attrezzature degli utenti inviano dati relativi alla salute di questi ultimi
+    i dati vengono validati dalla blockchain
+'''
+INTERVALLO=5 # intervallo di tempo per il ciclo
 
 def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
@@ -17,6 +15,7 @@ def main():
     set.attrezzature(contratto)
     with open('scripts/attrezzature.json','r') as file:
         attrezzature=json.load(file)
+    # ciclo infinito per la validazione continua dei dati stream (controllo se l'attrezzatura appartiene al paziente)
     while True:
         i=random.randint(1,5)-1
         print("L'utente ", accounts[i+1], "sta inserendo un dato relativo al dispositivo:")
