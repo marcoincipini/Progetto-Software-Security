@@ -3,7 +3,10 @@ import scripts.setup as set
 import scripts.pinata as pinata
 import json
 import datetime
-
+'''
+demo: L'utente medico può visualizzare il piano terapeutico di uno dei suoi pazienti, modificarlo o aggiungere una voce.
+    Il paziente può visualizzare il suo piano terapeutico.
+'''
 def main():
     contratto=GestioneADI.deploy(accounts[0],{'from':accounts[0]})
     set.utenti(contratto)
@@ -146,7 +149,7 @@ def checkValore(nuovo_valore, chiave):
                 return False
         elif chiave in ["Data inizio", "Data fine"]:
             try:
-                datetime.datetime.strptime(nuovo_valore, '%d/%m/%Y') #controllo sulla data
+                datetime.datetime.strptime(nuovo_valore, '%d/%m/%Y') # controllo sulla data
                 return True
             except ValueError:
                 return False
