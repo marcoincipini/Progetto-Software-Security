@@ -11,42 +11,45 @@ def main():
     menu1 = True
     while(menu1):
         try:
-            scelta = int(input("Seleziona azione (0: Utente medico - Visualizza/Aggiungi terapia; 1: Utente Paziente - Visualizza piano terapeutico; altro intero: esci): "))
+            scelta = int(input("Seleziona azione (0: Utente medico - Visualizza/Aggiungi terapia; 1: Utente Paziente - Visualizza piano terapeutico; altro intero: esci):\n "))
             #Utente medico
             if(scelta==0):
+                print("accesso effettuato come account Medico\n")
                 medici = contratto.getMedici({'from': accounts[0]})
                 for i, medico in enumerate(medici):
                         print(f"{i + 1}: {medico}")
+                        print("\n")
                 try:
-                    selezione = int(input("Seleziona ID dell'utente medico: "))
+                    selezione = int(input("Seleziona ID dell'utente medico:\n "))
                     if 1 <= selezione <= len(medici):
                         indirizzo_med = medici[selezione-1]
                         pazienti_med = contratto.getPazientiDelMedico(indirizzo_med, {'from': accounts[0]})
                     else:
-                        print("Selezione non valida.")                    
+                        print("Selezione non valida.\n")                    
                 except ValueError:
-                    print("Input non valido. Inserisci un numero intero.")
+                    print("Input non valido. Inserisci un numero intero.\n")
                 
                 for i, paziente_med in enumerate(pazienti_med):
                         print(f"{i + 1}: {paziente_med}")
+                        print("\n")
                 try:
-                    selezione = int(input("Seleziona ID del paziente: "))
+                    selezione = int(input("Seleziona ID del paziente:\n "))
                     if 1 <= selezione <= len(pazienti_med):
                         indirizzo_paz = pazienti_med[selezione-1]
                         print(indirizzo_paz)
                     else:
-                        print("Selezione non valida.")                    
+                        print("Selezione non valida.\n")                    
                 except ValueError:
-                    print("Input non valido. Inserisci un numero intero.")
+                    print("Input non valido. Inserisci un numero intero.\n")
 
                 hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_med})
                 json_terapia = visualizzaJson(hash_terapia)
 
                 try:
-                    selezione = int(input("Seleziona azione (0: Modifica piano terapeutico; 1: Aggiungi nuova terapia; altro intero: esci): "))
+                    selezione = int(input("Seleziona azione (0: Modifica piano terapeutico; 1: Aggiungi nuova terapia; altro intero: esci):\n "))
                     if (selezione == 0):
                         try:
-                            id_terapia = int(input("Seleziona ID della terapia: "))
+                            id_terapia = int(input("Seleziona ID della terapia:\n "))
                             if id_terapia >= 1 and id_terapia <= len(json_terapia):
                                 terapia_selezionata = json_terapia[id_terapia - 1]
                                 print("Terapia selezionata:", terapia_selezionata)
@@ -61,15 +64,15 @@ def main():
                                             terapia_selezionata[chiave] = nuovo_valore
                                         else:
                                             if nuovo_valore:
-                                                print("Valore non valido! Verrà mantenuto il valore di default.")
+                                                print("Valore non valido! Verrà mantenuto il valore di default.\n")
                                 print("Terapia modificata:", terapia_selezionata)
                                 #upload su pinata e su blockchain
                                 uploadTerapia(contratto,json_terapia,indirizzo_paz,indirizzo_med)
 
                             else:
-                                print("ID terapia non valido.")
+                                print("ID terapia non valido.\n")
                         except ValueError:
-                            print("Input non valido. Inserisci un numero intero")
+                            print("Input non valido. Inserisci un numero intero\n")
                     
                     elif (selezione == 1):
                         temp = json_terapia[0]
@@ -85,21 +88,22 @@ def main():
                                     nuova_terapia[chiave] = nuovo_valore
                                     flag = False
                                 else:
-                                    print("Inserisci un valore valido!")
+                                    print("Inserisci un valore valido!\n")
                         json_terapia.append(nuova_terapia)
                         #upload su pinata e su blockchain
                         uploadTerapia(contratto,json_terapia,indirizzo_paz,indirizzo_med)
                         
                 except ValueError:
-                    print("Scelta non valida... inserisci un numero intero.")
+                    print("Scelta non valida... inserisci un numero intero.\n")
 
             #Utente paziente 
             elif(scelta==1):
+                print("accesso effettuato come account paziente\n")
                 pazienti = contratto.getPazienti({'from': accounts[0]})
                 for i, paziente in enumerate(pazienti):
                     print(f"{i + 1}: {paziente}")
                 try:
-                    selezione = int(input("Seleziona ID del paziente: "))
+                    selezione = int(input("Seleziona ID del paziente:\n "))
                     if 1 <= selezione <= len(pazienti):
                         paz = pazienti[selezione-1]
                         indirizzo_paz = paz[0]
@@ -109,14 +113,14 @@ def main():
                     else:
                         print("Selezione non valida.")                    
                 except ValueError:
-                    print("Input non valido. Inserisci un numero intero.")
+                    print("Input non valido. Inserisci un numero intero.\n")
 
             #Uscita
             else:
                 print("Uscita...")
                 menu1=False
         except ValueError:
-            print("Scelta non valida... inserisci un numero intero.")
+            print("Scelta non valida... inserisci un numero intero.\n")
 
 def visualizzaJson(hash):
     json_terapia = pinata.get_file_from_pinata(hash)
@@ -154,7 +158,7 @@ def checkValore(nuovo_valore, chiave):
             else:
                 return False
         else:
-            print("Chiave non contemplata...")
+            print("Chiave non contemplata...\n")
             return False
     else:
         return False

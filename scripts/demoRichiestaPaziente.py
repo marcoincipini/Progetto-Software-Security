@@ -12,6 +12,7 @@ def main():
         try:
             scelta = int(input("Seleziona azione (0: Invia una richiesta come nuovo paziente; 1: Visualizza/accetta richieste con l'utente ASUR; altro intero: esci): "))
             if(scelta==0):
+                print("accesso effettuato come paziente")
                 nuovo_ID = len(accounts)
                 i = True
                 while(i):
@@ -41,6 +42,7 @@ def main():
                 print("Il paziente ", accounts[nuovo_paziente['ID']], " ha inviato una richiesta ADI.")
 
             elif scelta == 1:
+                print("accesso effettuato come utente ASUR")
                 richieste = contratto.getRichieste()
                 if not richieste:
                     print("Non ci sono richieste da visualizzare.")
