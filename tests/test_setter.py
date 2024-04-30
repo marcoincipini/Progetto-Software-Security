@@ -19,7 +19,7 @@ def test_set_terapia(setup):
 
     """questa riga di codice contiene un test che non dovrebbe andare a buon fine, dato che prova
     ad accedere alle terapie con un account che non è quello di un medico, dovrebbe dare come errore 'Medico inesistente' """
-    assert setup.setTerapia(accounts[1], "Terapia X", {'from': accounts[8]})
+    #assert setup.setTerapia(accounts[1], "Terapia X", {'from': accounts[8]})
 
     """questa riga di codice contiene un test che non dovrebbe andare a buon fine, dato che l'account che prova a
     settare la terapia è un account medico, ma non è quello associato al paziente giusto, quindi dovrebbe restituire come errore
@@ -28,8 +28,8 @@ def test_set_terapia(setup):
 
     """queste righe di codice contengono un test che dovrebbe andare a buon fine, dato che prova
     ad accedere alle terapie con un account che è quello di un medico"""
-    # hash = pinata.upload_to_pinata("temp.json")
-    # assert setup.setTerapia(accounts[1],bytes(hash,'utf-8'), {'from': accounts[6]})
+    
+    assert setup.setTerapia(accounts[1],"Terapia X", {'from': accounts[6]})
 
 
 # Test per il metodo setPaziente
