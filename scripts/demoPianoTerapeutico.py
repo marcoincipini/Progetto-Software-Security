@@ -18,13 +18,13 @@ def main():
             scelta = int(input("Seleziona azione (0: Utente medico - Visualizza/Aggiungi terapia; 1: Utente Paziente - Visualizza piano terapeutico; altro intero: esci):\n "))
             #Utente medico
             if(scelta==0):
-                print("accesso effettuato come account Medico\n")
                 medici = contratto.getMedici({'from': accounts[0]})
                 for i, medico in enumerate(medici): # visualizzo tutti i medici per la selezione
                         print(f"{i + 1}: {medico}")
                 try:
                     selezione = int(input("Seleziona ID dell'utente medico:\n"))
                     if 1 <= selezione <= len(medici): # se la selezione è valida consento la selezione di un paziente associato
+                        print("accesso effettuato come account Medico\n")
                         indirizzo_med = medici[selezione-1]
                         pazienti_med = contratto.getPazientiDelMedico({'from': indirizzo_med}) # ottengo tutti i pazienti associati al medico
                         for i, paziente_med in enumerate(pazienti_med): # visualizzo tutti i pazienti associati al medico
@@ -103,13 +103,13 @@ def main():
 
             # Scelta dell'utente paziente - visualizzazione json
             elif(scelta==1):
-                print("accesso effettuato come account paziente\n")
                 pazienti = contratto.getPazienti({'from': accounts[0]}) 
                 for i, paziente in enumerate(pazienti): # visualizza tutti i pazienti
                     print(f"{i + 1}: {paziente}")
                 try:
                     selezione = int(input("Seleziona ID del paziente:\n "))
                     if 1 <= selezione <= len(pazienti):
+                        print("accesso effettuato come account paziente\n")
                         paz = pazienti[selezione-1]
                         indirizzo_paz = paz[0]
                         hash_terapia = contratto.getTerapia(indirizzo_paz, {'from': indirizzo_paz})
