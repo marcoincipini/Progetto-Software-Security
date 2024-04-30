@@ -47,7 +47,19 @@ contract GestioneADI {
     constructor(address _asur) { 
         asur = _asur;
     }
+    
+    // modifier che controlla che l'utente sia ASUR
+    modifier onlyASUR {
+        require(msg.sender == asur, "Utente senza privilegi necessari");
+        _;
+    }
 
+    // modifier che controlla l'esistenza di un paziente
+    modifier checkEsistenzaPz(address _pz) {
+        require(ckpaziente(_pz), "Paziente inesistente");
+        _;
+    }
+    
     /**
     SETTER DI TUTTE LE STRUTTURE
      */
@@ -55,14 +67,12 @@ contract GestioneADI {
         richieste.push(paziente(_pz, _lat, _lon));
     }
     
-    function setPaziente(address _pz, uint8 _lat, uint8 _lon) public {
-        require(msg.sender == asur, "Utente senza privilegi necessari");
-
+    function setPaziente(address _pz, uint8 _lat, uint8 _lon) onlyASUR public {
         pazienti.push(paziente(_pz, _lat, _lon));
     }
 
-    function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) public {
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    // setter per un paziente che viene inserito attraverso una sua richiesta ADI
+    function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) onlyASUR public {
         setPaziente(_pz, _lat, _lon);
         
         for (uint i = _index; i < richieste.length - 1; i++) {
@@ -71,30 +81,23 @@ contract GestioneADI {
         richieste.pop();
     }
 
-    function setMedico(address _medico) public{
-        require(msg.sender == asur, "Utente senza privilegi necessari");
-
+    function setMedico(address _medico) onlyASUR public{
         medici.push(_medico);
     }
 
-    function setOperatore(address _operatore) public {
-        require(msg.sender == asur, "Utente senza privilegi necessari");
-
+    function setOperatore(address _operatore) onlyASUR public {
         operatori.push(_operatore);
     }
 
-    function setAttrezzatura(address _pz, uint256 _id, string memory _att) public{
-        require(msg.sender == asur, "Utente senza privilegi necessari");
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function setAttrezzatura(address _pz, uint256 _id, string memory _att) onlyASUR checkEsistenzaPz(_pz) public{
         bytes32 _hash = keccak256(abi.encode(_pz,_id,_att));
         listaattrezzatura.push(attrezzature(_pz, _hash));
     }
 
-    function setTerapia(address _pz, string memory _ter) public{
+    function setTerapia(address _pz, string memory _ter) checkEsistenzaPz(_pz) public{
         require(ckmedico(msg.sender), "Medico inesistente");
-        require(ckpaziente(_pz), "Paziente inesistente");
         require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
-        //elimino, se c'è, la terapia precedente
+        // se è presente, elimino la terapia precedente
         for (uint i = 0; i < listaterapie.length; i++) {
             if(listaterapie[i].paziente == _pz) {
                 delete listaterapie[i];
@@ -103,8 +106,7 @@ contract GestioneADI {
         listaterapie.push(terapie(_pz, _ter));
     }
 
-    function setConferma(address _pz, address _op, string memory _prest, string memory _id) public{
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function setConferma(address _pz, address _op, string memory _prest, string memory _id) checkEsistenzaPz(_pz) public{
         require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
         require(msg.sender == asur || medicoCurante[_pz]==msg.sender, "Utente senza privilegi necessari");
 
@@ -156,8 +158,7 @@ contract GestioneADI {
     }
 
     // Setter del mapping paziente-medico
-    function setmedicoCurante(address _pz, address _md) public{
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function setmedicoCurante(address _pz, address _md) checkEsistenzaPz(_pz) public{
         require(ckmedico(_md), "Medico inesistente");
 
         medicoCurante[_pz] = _md;
@@ -197,8 +198,7 @@ contract GestioneADI {
         return false;
     }
 
-    function ckattrezzature(address _pz) public view returns (bytes32 hashcode){
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function ckattrezzature(address _pz) checkEsistenzaPz(_pz) public view returns (bytes32 hashcode){
         for (uint256 i=0; i < listaattrezzatura.length; i++){
             if(listaattrezzatura[i].paziente == _pz){
                 return listaattrezzatura[i].attrezzatura;
@@ -207,8 +207,7 @@ contract GestioneADI {
         }
     }
 
-    function ckterapie(address _pz) public view returns (string memory hashcode){
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function ckterapie(address _pz) checkEsistenzaPz(_pz) public view returns (string memory hashcode){
         for (uint256 i=0; i < listaterapie.length; i++){
             if(listaterapie[i].paziente == _pz){
                 return listaterapie[i].terapia;
@@ -221,42 +220,39 @@ contract GestioneADI {
     GETTER DELLE STRUTTURE DATI
      */
     
-    function getRichieste() public view returns (paziente[] memory){
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    function getRichieste() onlyASUR public view returns (paziente[] memory){
         return richieste;
     }
     
-    function getTerapia(address _pz) public view returns (string memory hashcode){
-        require(ckpaziente(_pz), "Paziente inesistente");
+    function getTerapia(address _pz) checkEsistenzaPz(_pz) public view returns (string memory hashcode){
         require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");
         return ckterapie(_pz);
     }
 
-    function getConfermeall() public view returns (conferme[] memory){
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    function getConfermeall() onlyASUR public view returns (conferme[] memory){
         return conferma;
     }
 
     function getConferme() public view returns (conferme[] memory) {
         require(ckoperatore(msg.sender), "Utente senza privilegi necessari");
         
-        // Creare un array dinamico temporaneo per memorizzare le conferme
+        // Crea un array dinamico temporaneo per memorizzare le conferme
         conferme[] memory confOpTemp = new conferme[](conferma.length);
         uint256 count = 0;
 
-        // Iterare attraverso l'array di conferme
+        // Itera le conferme
         for (uint256 i = 0; i < conferma.length; i++) {
-            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
+            // Se l'operatore corrente è l'utente chiamante, aggiunge la conferma all'array temporaneo
             if (conferma[i].operatore == msg.sender) {
                 confOpTemp[count] = conferma[i];
                 count++;
             }
         }
 
-        // Creare un nuovo array dinamico della dimensione corretta
+        // Crea un nuovo array dinamico della dimensione corretta
         conferme[] memory confOp = new conferme[](count);
         
-        // Copiare gli elementi dall'array temporaneo al nuovo array di output
+        // Copia gli elementi dall'array temporaneo al nuovo array di output
         for (uint256 j = 0; j < count; j++) {
             confOp[j] = confOpTemp[j];
         }
@@ -267,23 +263,17 @@ contract GestioneADI {
     function getValidazione() public view returns (conferme[] memory){
         require(ckpaziente(msg.sender), "Utente senza privilegi necessari");
         
-        // Creare un array dinamico temporaneo per memorizzare le conferme
         conferme[] memory confOpTemp = new conferme[](validazione.length);
         uint256 count = 0;
 
-        // Iterare attraverso l'array di conferme
         for (uint256 i = 0; i < validazione.length; i++) {
-            // Se l'operatore corrente è l'utente chiamante, aggiungi la conferma all'array temporaneo
             if (validazione[i].paziente == msg.sender) {
                 confOpTemp[count] = validazione[i];
                 count++;
             }
         }
 
-        // Creare un nuovo array dinamico della dimensione corretta
         conferme[] memory confOp = new conferme[](count);
-        
-        // Copiare gli elementi dall'array temporaneo al nuovo array di output
         for (uint256 j = 0; j < count; j++) {
             confOp[j] = confOpTemp[j];
         }
@@ -291,13 +281,12 @@ contract GestioneADI {
         return confOp;
     }
 
-    function getMedici() public view returns (address[] memory){
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    function getMedici() onlyASUR public view returns (address[] memory){
         return medici;
     }
 
-    function getPazientiDelMedico(address medico) public view returns (address[] memory) {
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    // ritorna gli indirizzi di tutti i pazienti associati ad un medico
+    function getPazientiDelMedico(address medico) onlyASUR public view returns (address[] memory) {
         address[] memory pazientiAssociatiTemp = new address[](pazienti.length);
         uint256 count = 0;
         for (uint256 i = 0; i < pazienti.length; i++) {
@@ -314,18 +303,16 @@ contract GestioneADI {
         return pazientiAssociati;
     }
     
-    function getPazienti() public view returns (paziente[] memory){
-        require(msg.sender == asur, "Utente senza privilegi necessari");
+    function getPazienti() onlyASUR public view returns (paziente[] memory){
         return pazienti;
     }
 
     /**
     Validazione dei dati stream
      */
-    function validaRilevazione(address _pz, uint256 _id, string memory _att) public view returns (bool){
-        require(ckpaziente(_pz), "Paziente inesistente");
+     
+    function validaRilevazione(address _pz, uint256 _id, string memory _att) checkEsistenzaPz(_pz) public view returns (bool){
         require(msg.sender==_pz, "Paziente non autorizzato");
         return (keccak256(abi.encode(_pz,_id,_att))==ckattrezzature(_pz));
-
     }
 }
