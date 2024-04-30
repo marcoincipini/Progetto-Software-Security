@@ -58,12 +58,12 @@ def test_get_pazienti_del_medico(setup):
     
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per la visualizzazione dei pazienti
     di un determinato medico (in questo caso quello associato all'account 6), avviene da un account ASUR, come dovrebbe essere"""
-    #assert setup.getPazientiDelMedico(accounts[6], {'from':accounts[0]})
+    assert setup.getPazientiDelMedico({'from':accounts[6]})
 
     """questa riga di codice contiene un test che non dovrebbe andare a buon fine, dato che la richiesta per la visualizzazione dei pazienti
     di un determinato medico (in questo caso quello associato all'account 6),avviene da un account non ASUR (operatore in questo caso). 
     L'output aspettato sarebbe 'Utente senza privilegi necessari' """
-    assert setup.getPazientiDelMedico(accounts[6], {'from':accounts[8]})
+    #assert setup.getPazientiDelMedico({'from':accounts[8]})
 
 def test_get_terapia(setup):
     # togliere il commento alla tipologia di test che si desidera eseguire

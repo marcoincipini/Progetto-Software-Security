@@ -26,7 +26,7 @@ def main():
                     selezione = int(input("Seleziona ID dell'utente medico:\n"))
                     if 1 <= selezione <= len(medici): # se la selezione è valida consento la selezione di un paziente associato
                         indirizzo_med = medici[selezione-1]
-                        pazienti_med = contratto.getPazientiDelMedico(indirizzo_med, {'from': accounts[0]}) # ottengo tutti i pazienti associati al medico
+                        pazienti_med = contratto.getPazientiDelMedico({'from': indirizzo_med}) # ottengo tutti i pazienti associati al medico
                         for i, paziente_med in enumerate(pazienti_med): # visualizzo tutti i pazienti associati al medico
                             print(f"{i + 1}: {paziente_med}")
                         try:
