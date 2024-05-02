@@ -108,18 +108,53 @@ brownie run scripts/NOMEDEMO.py
 ### Demo
 * *demoConferme.py* riguarda il processo di conferma di una prestazione presso il paziente. 
 Il medico/operatore sanitario avvia il processo ed il paziente lo conferma.
+```
+brownie run scripts/demoConferme.py
+```
 
 * *demoRichiestaPaziente.py* riguarda la fase di richiesta inserimento al programma ADI. 
 Il paziente manda una richiesta all'ASUR per essere aggiunto al programma ADI; L'ASUR può accettare la richiesta.
+```
+brownie run scripts/demoRichiestePaziente.py
+```
 
 * *demoPianoTerapeutico.py* riguarda la visualizzazione e/o modifica del piano terapeutico di un paziente.
 L'utente medico può visualizzare il piano terapeutico di uno dei suoi pazienti, modificarlo o aggiungere una voce. Il paziente può visualizzare il suo piano terapeutico.
+```
+brownie run scripts/demoPianoTerapeutico.py
+```
 
 * *demoValidazioneStream.py* riguarda la validazione dei dati stream ricevuti dalle attrezzature.
 Le attrezzature degli utenti inviano dati relativi alla salute di questi ultimi; i dati vengono validati dal contratto.
+```
+brownie run scripts/demoValidazioneStream.py
+```
 
 <a name="test"></a>
 ## Test
+Per verificare il corretto funzionamento del contratto sviluppato sono stati creati dei test specifici.
+I test possono essere avviati singolarmente con
+```
+brownie test tests/NOMETEST.py
+```
+nello specifico:
+```
+brownie test tests/test_conferme.py
+```
+```
+brownie test tests/test_getter.py
+```
+```
+brownie test tests/test_setter.py
+```
+```
+brownie test tests/test_validazione.py
+```
+
+Possono essere avviati tutti i test con
+```
+brownie test
+```
 
 <a name="autors"></a>
 ## Autori
