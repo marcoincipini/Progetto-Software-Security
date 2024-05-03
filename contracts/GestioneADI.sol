@@ -286,11 +286,12 @@ contract GestioneADI {
     }
 
     // ritorna gli indirizzi di tutti i pazienti associati ad un medico
-    function getPazientiDelMedico(address medico) onlyASUR public view returns (address[] memory) {
+    function getPazientiDelMedico() public view returns (address[] memory) {
+        require(ckmedico(msg.sender), "Utente non medico");
         address[] memory pazientiAssociatiTemp = new address[](pazienti.length);
         uint256 count = 0;
         for (uint256 i = 0; i < pazienti.length; i++) {
-            if (medicoCurante[pazienti[i].pz] == medico) {
+            if (medicoCurante[pazienti[i].pz] == msg.sender) {
                 pazientiAssociatiTemp[count] = pazienti[i].pz;
                 count++;
             }
