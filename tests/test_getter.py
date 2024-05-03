@@ -14,8 +14,6 @@ def setup():
     yield contratto
 
 def test_get_conferme(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta di avere una conferma
     avviene da un account operatore, come dovrebbe essere"""
     assert setup.getConferme({'from':accounts[8]})
@@ -28,8 +26,6 @@ def test_get_conferme_ex(setup):
         setup.getConferme({'from':accounts[6]})
      
 def test_get_validazione(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     """queste righe di codice contengono un test che dovrebbe andare a buon fine, dato che la richiesta di avere una validazione 
     avviene da un account corretto (operatore), e la prestazione da confermare ha i parametri corretti"""
     with open('scripts/conferme.json','r') as file_conferme, open('scripts/pazienti.json','r') as file_pazienti:
@@ -52,8 +48,6 @@ def test_get_validazione_ex(setup):
         setup.getValidazione({'from':accounts[0]})
 
 def test_get_medici(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per vedere i medici
     avviene da un account ASUR, come dovrebbe essere"""
     assert setup.getMedici({'from':accounts[0]})
@@ -65,8 +59,6 @@ def test_get_medici_ex(setup):
         setup.getMedici({'from':accounts[8]})
 
 def test_get_pazienti_del_medico(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-    
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per la visualizzazione dei pazienti
     di un determinato medico (in questo caso quello associato all'account 6), avviene da un account ASUR, come dovrebbe essere"""
     assert setup.getPazientiDelMedico({'from':accounts[6]})
@@ -79,8 +71,6 @@ def test_get_pazienti_del_medico_ex(setup):
         setup.getPazientiDelMedico({'from':accounts[8]})
 
 def test_get_terapia(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     """righe di codice contententi il setup della terapia, necessario per poterla visualizzare"""
     setup.setTerapia(accounts[1],"Terapia X", {'from': accounts[6]})
     
@@ -105,7 +95,7 @@ def test_get_terapia_ex1(setup):
     with pytest.raises(Exception):
         setup.getTerapia(accounts[7], {'from':accounts[1]})
 
-def test_get_terapia_ex1(setup):
+def test_get_terapia_ex2(setup):
     """righe di codice contententi il setup della terapia, necessario per poterla visualizzare"""
     setup.setTerapia(accounts[1],"Terapia X", {'from': accounts[6]})
 
@@ -115,8 +105,6 @@ def test_get_terapia_ex1(setup):
         setup.getTerapia(accounts[1], {'from':accounts[7]})
 
 def test_get_pazienti(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per vedere i pazienti
     avviene da un account ASUR, come dovrebbe essere"""
     assert setup.getPazienti({'from':accounts[0]})
@@ -128,8 +116,6 @@ def test_get_pazienti_ex(setup):
         setup.getPazienti({'from':accounts[5]})
 
 def test_get_richieste(setup):
-    # togliere il commento alla tipologia di test che si desidera eseguire
-
     #Setup delle richieste necessario per vedere tutte le richieste presenti
     setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
 
@@ -138,8 +124,6 @@ def test_get_richieste(setup):
     assert setup.getRichieste({'from':accounts[0]})
 
 def test_get_richieste_ex(setup):
-     # togliere il commento alla tipologia di test che si desidera eseguire
-
     #Setup delle richieste necessario per vedere tutte le richieste presenti
     setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
     
