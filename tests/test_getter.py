@@ -42,12 +42,7 @@ def test_get_validazione(setup):
 def test_get_validazione_ex(setup):
     """questa riga di codice contiene un test che non dovrebbe andare a buon fine, dato che la richiesta di avere una validazione
     avviene da un account non paziente (account ASUR in questo caso). L'output aspettato dovrebbe essere 'Utente senza privilegi necessari,
-    provare con account paziente' """
-    with open('scripts/conferme.json','r') as file_conferme, open('scripts/pazienti.json','r') as file_pazienti:
-        conferme = json.load(file_conferme)
-        paziente = json.load(file_pazienti)
-        
-    setup.confermaOperatore(paziente[0]['Latitudine'],paziente[0]['Longitudine'],conferme[0]['ID'],{'from':accounts[8]})
+    provare con account paziente'"""
     with pytest.raises(Exception):
         setup.getValidazione({'from':accounts[0]})
 
