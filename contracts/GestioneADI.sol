@@ -177,7 +177,7 @@ contract GestioneADI {
     function cklocpaziente(uint256 _lat, uint256 _lon, address _pz) private view returns (bool){
         for (uint256 i=0; i < pazienti.length; i++){
             if (pazienti[i].pz == _pz){
-                if ((pazienti[i].lat==_lat)||(pazienti[i].lon==_lon)){return true;}
+                if ((pazienti[i].lat==_lat)&&(pazienti[i].lon==_lon)){return true;}
                 return false;
             }
         }
