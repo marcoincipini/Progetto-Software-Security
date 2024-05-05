@@ -1,44 +1,44 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.4.0;
 
 contract GestioneADI {
     // Attributi
     // Struttura informazioni del paziente (hash)
-    struct paziente {
+    struct Paziente {
         address pz;
         uint8 lat;
         uint8 lon;
     }
 
     // Struttura informazioni attrezzature (hash)
-    struct attrezzature {
+    struct Attrezzature {
         address paziente;
         bytes32 attrezzatura;
     }
 
     // Struttura informazioni terapie (hash)
-    struct terapie {
+    struct Terapie {
         address paziente;
         string terapia;
     }
 
     // Struttura gestione delle conferme
-    struct conferme {
+    struct Conferme {
         address paziente;
         address operatore;
         string prestazione;
         string id;
     }
 
-    paziente[] private richieste;           // Array delle richieste ADI
-    paziente[] private pazienti;            // Array dei pazienti
+    Paziente[] private richieste;           // Array delle richieste ADI
+    Paziente[] private pazienti;            // Array dei pazienti
     address[] private medici;               // Array dei medici
     address[] private operatori;            // Array degli operatori sanitari
     address private asur;                   // Account amministratore
-    attrezzature[] private listaattrezzatura;   // Array delle attrezzature (hash)
-    terapie[] private listaterapie;         // Array delle terapie (1 per paziente) (hash)
-    conferme[] private conferma;            // Array gestione delle conferme operatore
-    conferme[] private validazione;         // Array gestione delle conferme paziente
+    Attrezzature[] private listaattrezzatura;   // Array delle attrezzature (hash)
+    Terapie[] private listaterapie;         // Array delle terapie (1 per paziente) (hash)
+    Conferme[] private conferma;            // Array gestione delle conferme operatore
+    Conferme[] private validazione;         // Array gestione delle conferme paziente
 
     // Informazioni su chi può inserire prestazioni per un determinato paziente
     mapping(address => address) private medicoCurante; // Associazione paziente-medico (chiave-valore)
@@ -63,16 +63,16 @@ contract GestioneADI {
     /**
     SETTER DI TUTTE LE STRUTTURE
      */
-    function SetRichieste(address _pz, uint8 _lat, uint8 _lon) public {
-        richieste.push(paziente(_pz, _lat, _lon));
+    function setRichieste(address _pz, uint8 _lat, uint8 _lon) public {
+        richieste.push(Paziente(_pz, _lat, _lon));
     }
     
-    function setPaziente(address _pz, uint8 _lat, uint8 _lon) onlyASUR public {
-        pazienti.push(paziente(_pz, _lat, _lon));
+    function setPaziente(address _pz, uint8 _lat, uint8 _lon) public onlyASUR {
+        pazienti.push(Paziente(_pz, _lat, _lon));
     }
 
     // setter per un paziente che viene inserito attraverso una sua richiesta ADI
-    function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) onlyASUR public {
+    function setPazienteASUR(address _pz, uint8 _lat, uint8 _lon, uint8 _index) public onlyASUR {
         setPaziente(_pz, _lat, _lon);
         
         for (uint i = _index; i < richieste.length - 1; i++) {
@@ -81,20 +81,20 @@ contract GestioneADI {
         richieste.pop();
     }
 
-    function setMedico(address _medico) onlyASUR public{
+    function setMedico(address _medico) public onlyASUR{
         medici.push(_medico);
     }
 
-    function setOperatore(address _operatore) onlyASUR public {
+    function setOperatore(address _operatore) public onlyASUR {
         operatori.push(_operatore);
     }
 
-    function setAttrezzatura(address _pz, uint256 _id, string memory _att) onlyASUR checkEsistenzaPz(_pz) public{
+    function setAttrezzatura(address _pz, uint256 _id, string memory _att) public onlyASUR checkEsistenzaPz(_pz){
         bytes32 _hash = keccak256(abi.encode(_pz,_id,_att));
-        listaattrezzatura.push(attrezzature(_pz, _hash));
+        listaattrezzatura.push(Attrezzature(_pz, _hash));
     }
 
-    function setTerapia(address _pz, string memory _ter) checkEsistenzaPz(_pz) public{
+    function setTerapia(address _pz, string memory _ter) public checkEsistenzaPz(_pz){
         require(ckmedico(msg.sender), "Medico inesistente");
         require(medicoCurante[_pz]==msg.sender, "Medico non associato al paziente");
         // se è presente, elimino la terapia precedente
@@ -103,19 +103,19 @@ contract GestioneADI {
                 delete listaterapie[i];
         }
     }
-        listaterapie.push(terapie(_pz, _ter));
+        listaterapie.push(Terapie(_pz, _ter));
     }
 
-    function setConferma(address _pz, address _op, string memory _prest, string memory _id) checkEsistenzaPz(_pz) public{
+    function setConferma(address _pz, address _op, string memory _prest, string memory _id) public checkEsistenzaPz(_pz){
         require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
         require(msg.sender == asur || medicoCurante[_pz]==msg.sender, "Utente senza privilegi necessari");
 
-        conferma.push(conferme(_pz, _op, _prest, _id));
+        conferma.push(Conferme(_pz, _op, _prest, _id));
     }
 
     function confermaOperatore(uint256 _lat, uint256 _lon,  string memory _id) public{
         require(ckoperatore(msg.sender), "Account non operatore!");
-        conferme memory prestazione;
+        Conferme memory prestazione;
         uint256 indice = 0;
         bool flag=false;
         for (uint256 i=0; i < conferma.length; i++){
@@ -139,7 +139,7 @@ contract GestioneADI {
     // prestazione validata dal paziente
     function confermaPaziente(string memory _id) public{
         require(ckpaziente(msg.sender), "Account non paziente");
-        conferme memory prestazione;
+        Conferme memory prestazione;
         uint256 indice = 0;
         bool flag=false;
         for (uint256 i=0; i < validazione.length; i++){
@@ -158,7 +158,7 @@ contract GestioneADI {
     }
 
     // Setter del mapping paziente-medico
-    function setmedicoCurante(address _pz, address _md) checkEsistenzaPz(_pz) public{
+    function setmedicoCurante(address _pz, address _md) public checkEsistenzaPz(_pz){
         require(ckmedico(_md), "Medico inesistente");
 
         medicoCurante[_pz] = _md;
@@ -198,7 +198,7 @@ contract GestioneADI {
         return false;
     }
 
-    function ckattrezzature(address _pz) checkEsistenzaPz(_pz) public view returns (bytes32 hashcode){
+    function ckattrezzature(address _pz) public checkEsistenzaPz(_pz) view returns (bytes32 hashcode){
         for (uint256 i=0; i < listaattrezzatura.length; i++){
             if(listaattrezzatura[i].paziente == _pz){
                 return listaattrezzatura[i].attrezzatura;
@@ -207,7 +207,7 @@ contract GestioneADI {
         }
     }
 
-    function ckterapie(address _pz) checkEsistenzaPz(_pz) public view returns (string memory hashcode){
+    function ckterapie(address _pz) public checkEsistenzaPz(_pz) view returns (string memory hashcode){
         for (uint256 i=0; i < listaterapie.length; i++){
             if(listaterapie[i].paziente == _pz){
                 return listaterapie[i].terapia;
@@ -220,24 +220,24 @@ contract GestioneADI {
     GETTER DELLE STRUTTURE DATI
      */
     
-    function getRichieste() onlyASUR public view returns (paziente[] memory){
+    function getRichieste() public onlyASUR view returns (Paziente[] memory){
         return richieste;
     }
     
-    function getTerapia(address _pz) checkEsistenzaPz(_pz) public view returns (string memory hashcode){
+    function getTerapia(address _pz) public checkEsistenzaPz(_pz) view returns (string memory hashcode){
         require(msg.sender == _pz || msg.sender == medicoCurante[_pz], "Utente non autorizzato!");
         return ckterapie(_pz);
     }
 
-    function getConfermeall() onlyASUR public view returns (conferme[] memory){
+    function getConfermeall() public onlyASUR view returns (Conferme[] memory){
         return conferma;
     }
 
-    function getConferme() public view returns (conferme[] memory) {
+    function getConferme() public view returns (Conferme[] memory) {
         require(ckoperatore(msg.sender), "Utente senza privilegi necessari");
         
         // Crea un array dinamico temporaneo per memorizzare le conferme
-        conferme[] memory confOpTemp = new conferme[](conferma.length);
+        Conferme[] memory confOpTemp = new Conferme[](conferma.length);
         uint256 count = 0;
 
         // Itera le conferme
@@ -250,7 +250,7 @@ contract GestioneADI {
         }
 
         // Crea un nuovo array dinamico della dimensione corretta
-        conferme[] memory confOp = new conferme[](count);
+        Conferme[] memory confOp = new Conferme[](count);
         
         // Copia gli elementi dall'array temporaneo al nuovo array di output
         for (uint256 j = 0; j < count; j++) {
@@ -260,10 +260,10 @@ contract GestioneADI {
         return confOp;
     }
 
-    function getValidazione() public view returns (conferme[] memory){
+    function getValidazione() public view returns (Conferme[] memory){
         require(ckpaziente(msg.sender), "Utente senza privilegi necessari");
         
-        conferme[] memory confOpTemp = new conferme[](validazione.length);
+        Conferme[] memory confOpTemp = new Conferme[](validazione.length);
         uint256 count = 0;
 
         for (uint256 i = 0; i < validazione.length; i++) {
@@ -273,7 +273,7 @@ contract GestioneADI {
             }
         }
 
-        conferme[] memory confOp = new conferme[](count);
+        Conferme[] memory confOp = new Conferme[](count);
         for (uint256 j = 0; j < count; j++) {
             confOp[j] = confOpTemp[j];
         }
@@ -281,7 +281,7 @@ contract GestioneADI {
         return confOp;
     }
 
-    function getMedici() onlyASUR public view returns (address[] memory){
+    function getMedici() public onlyASUR view returns (address[] memory){
         return medici;
     }
 
@@ -304,7 +304,7 @@ contract GestioneADI {
         return pazientiAssociati;
     }
     
-    function getPazienti() onlyASUR public view returns (paziente[] memory){
+    function getPazienti() public onlyASUR view returns (Paziente[] memory){
         return pazienti;
     }
 
@@ -312,7 +312,7 @@ contract GestioneADI {
     Validazione dei dati stream
      */
      
-    function validaRilevazione(address _pz, uint256 _id, string memory _att) checkEsistenzaPz(_pz) public view returns (bool){
+    function validaRilevazione(address _pz, uint256 _id, string memory _att) public checkEsistenzaPz(_pz) view returns (bool){
         require(msg.sender==_pz, "Paziente non autorizzato");
         return (keccak256(abi.encode(_pz,_id,_att))==ckattrezzature(_pz));
     }

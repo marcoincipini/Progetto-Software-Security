@@ -49,7 +49,7 @@ def test_set_paziente_2(setup):
 # Test per il metodo setPazienteASUR
 def test_set_paziente_asur_1(setup):
     # Setup delle richieste necessario per lanciare il metodo setPazienteASUR
-    setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
+    setup.setRichieste(accounts[1], 0, 0, {'from': accounts[0]})
 
     """queste righe di codice contengono un test che non dovrebbe andare a buon fine, dato che il set del paziente della struttura
     pazienteASUR dovrebbe essere fatto solamente da un account con livello di privilegio ASUR, invece in questo caso viene fatto
@@ -59,7 +59,7 @@ def test_set_paziente_asur_1(setup):
 
 def test_set_paziente_asur_2(setup):
     # Setup delle richieste necessario per lanciare il metodo setPazienteASUR
-    setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
+    setup.setRichieste(accounts[1], 0, 0, {'from': accounts[0]})
 
     """queste righe di codice contengono un test che dovrebbe andare a buon fine, dato che il set della struttura
     pazienteASUR viene fatto  da un account con livello di privilegio ASUR"""

@@ -40,7 +40,7 @@ def main():
                 print("E' stato creato un nuovo paziente: ", accounts[nuovo_paziente['ID']])
 
                 # viene inviata una richiesta dal paziente
-                contratto.SetRichieste(accounts[nuovo_paziente['ID']], nuovo_paziente['Latitudine'], nuovo_paziente['Longitudine'], {'from': accounts[nuovo_paziente['ID']]})
+                contratto.setRichieste(accounts[nuovo_paziente['ID']], nuovo_paziente['Latitudine'], nuovo_paziente['Longitudine'], {'from': accounts[nuovo_paziente['ID']]})
                 print("Il paziente ", accounts[nuovo_paziente['ID']], " ha inviato una richiesta ADI.")
 
             # Selezione per accettare le richieste ADI di nuovi utenti da parte dell'ASUR

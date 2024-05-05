@@ -112,7 +112,7 @@ def test_get_pazienti_ex(setup):
 
 def test_get_richieste(setup):
     #Setup delle richieste necessario per vedere tutte le richieste presenti
-    setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
+    setup.setRichieste(accounts[1], 0, 0, {'from': accounts[0]})
 
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per vedere le richieste
     avviene da un account ASUR, come dovrebbe essere"""
@@ -120,7 +120,7 @@ def test_get_richieste(setup):
 
 def test_get_richieste_ex(setup):
     #Setup delle richieste necessario per vedere tutte le richieste presenti
-    setup.SetRichieste(accounts[1], 0, 0, {'from': accounts[0]})
+    setup.setRichieste(accounts[1], 0, 0, {'from': accounts[0]})
     
     """questa riga di codice contiene un test che dovrebbe andare a buon fine, dato che la richiesta per vedere le richieste
     avviene da un account non ASUR (paziente in questo caso), L'output aspettato sarebbe 'Utente senza privilegi necessari'"""
