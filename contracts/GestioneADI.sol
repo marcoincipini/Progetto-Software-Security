@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.4.0;
+pragma solidity ^0.8.4;
 
 contract GestioneADI {
     // Attributi
@@ -106,7 +106,7 @@ contract GestioneADI {
         listaterapie.push(Terapie(_pz, _ter));
     }
 
-    function setConferma(address _pz, address _op, string memory _prest, string memory _id) public checkEsistenzaPz(_pz){
+    function setConferma(address _pz,address _op,string memory _prest,string memory _id) public checkEsistenzaPz(_pz){
         require(ckmedico(_op)||ckoperatore(_op), "Medico inesistente");
         require(msg.sender == asur || medicoCurante[_pz]==msg.sender, "Utente senza privilegi necessari");
 
