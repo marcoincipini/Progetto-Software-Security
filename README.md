@@ -15,8 +15,8 @@ Per fare ciò è stato sviluppato uno smart contract su blockchain Ethereum per 
 
 <a name="tech"></a>
 ## Tecnologie utilizzate
-* **Python** per lo sviluppo delle demo interattive
 * **Solidity** per lo sviluppo dello smart contract
+* **Python** per lo sviluppo delle demo interattive
 * **Brownie** framework per lo sviluppo, debug e test dello smart contract
 * **Ganache** per eseguire localmente una Blockchain Ethereum di test
 * **Pinata** piattaforma di storage basata su IPFS
@@ -46,13 +46,11 @@ pipx install eth-brownie
 Ora è necessario creare una cartella vuota dove fare il pull della repository.
 Al suo interno aprire la Powershell ed eseguire
 ```
-brownie init 
 git init 
 git remote add origin https://github.com/marcoincipini/Progetto-Software-Security 
 git pull origin main
 brownie compile
 ```
-(se viene visualizzato un errore, eliminare i file che vengono riportati).
 
 Installare Ganache dalla Powershell
 ```
@@ -68,7 +66,6 @@ Installare Ganache (Richiede NODE.js)
 ```
 npm install ganache --global 
 ```
-[Connettere Brownie a Ganache](https://eth-brownie.readthedocs.io/en/stable/network-management.html)
 
 Configurazione di brownie e pull della repository all'interno di una nuova cartella
 ```
@@ -79,7 +76,7 @@ git pull origin main
 brownie compile 
 ```
 ### Docker
-Nel caso in cui si abbia a disposizione il Dockerfile per l'installazione ed una versione funzionante di Docker e Docker Compose, l'applicazione può essere installata eseguendo
+Avendo a disposizione il Dockerfile per l'installazione ed una versione funzionante di Docker e Docker Compose, l'applicazione può essere installata eseguendo
 ```
 docker-compose build
 docker build -t gestione_adi .
