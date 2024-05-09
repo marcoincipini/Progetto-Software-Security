@@ -25,6 +25,7 @@ Per fare ciò è stato sviluppato uno smart contract su blockchain Ethereum per 
 <a name="install"></a>
 ## Installazione
 Per installare ed utilizzare l'applicazione è necessario installare Brownie e Ganache. Il modo più semplice consiste nel seguire i seguenti passaggi:
+
 ### Windows
 nella Powershell di Windows
 ```
@@ -72,6 +73,21 @@ Per verificare la corretta installazione eseguire il comando:
 brownie test
 ```
 
+### Mac
+Per installare l'applicativo è possibile scaricare il file linux_gestioneadi.sh ed eseguirlo. Per dare i privilegi di esecuzione allo script usare il comando:
+```
+chmod +x mac_gestioneadi.sh
+```
+Per eseguire lo script usare il comando:
+```
+./mac_gestioneadi.sh
+```
+
+Per verificare la corretta installazione eseguire il comando:
+```
+brownie test
+```
+
 Per eseguire le demo inserire il file .env nella cartella di progetto (rinominandolo .env)
 ### Docker
 E possibile eseguire il progetto in un container scaricando il file docker.
@@ -84,6 +100,8 @@ Può essere poi avviata con
 ```
 docker run -it --rm --env-file pinata.env --name adi gestione_adi
 ```
+Lo script docker è stato testato su architetture amd, e non funziona per architetture arm. In caso di utilizzo di architetture di questo tipo, eseguire uno degli script di installazione sopra indicati.
+
 <a name="usage"></a>
 ## Funzionamento
 Ad ogni utente è associato un account nella blockchain Ethereum che, in base al ruolo assegnato in fase di creazione (paziente, medico, operatore sanitario, ASUR) può effettuare determinate azioni.

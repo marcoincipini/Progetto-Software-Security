@@ -141,7 +141,10 @@ contract GestioneADI {
         uint256 _lon,
         string memory _id
     ) public {
-        require(ckoperatore(msg.sender), "Account non operatore!");
+        require(
+            ckoperatore(msg.sender) || ckmedico(msg.sender),
+            "Account non operatore!"
+        );
         Conferme memory prestazione;
         uint256 indice = 0;
         bool flag = false;
