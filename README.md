@@ -57,25 +57,24 @@ Installare Ganache dalla Powershell
 npm install ganache -global
 ```
 ### Ubuntu
-Installare Brownie (Richiede python3)
+Per installare l'applicativo è possibile scaricare il file linux_gestioneadi.sh ed eseguirlo. Per dare i privilegi di esecuzione allo script usare il comando:
 ```
-pip install eth-brownie 
-```
-
-Installare Ganache (Richiede NODE.js)
-```
-npm install ganache --global 
+chmod +x linux_gestioneadi.sh
 ```
 
-Configurazione di brownie e pull della repository all'interno di una nuova cartella
+Per eseguire lo script usare il comando:
 ```
-brownie init 
-git init 
-git remote add origin https://github.com/marcoincipini/Progetto-Software-Security 
-git pull origin main
-brownie compile 
+./linux_gestioneadi.sh
 ```
+
+Per verificare la corretta installazione eseguire il comando:
+```
+brownie test
+```
+
+Per eseguire le demo inserire il file .env nella cartella di progetto (rinominandolo .env)
 ### Docker
+E possibile eseguire il progetto in un container scaricando il file docker.
 Avendo a disposizione il Dockerfile per l'installazione ed una versione funzionante di Docker e Docker Compose, l'applicazione può essere installata eseguendo
 ```
 docker-compose build
